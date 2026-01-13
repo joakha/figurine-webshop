@@ -6,8 +6,6 @@
     // "outDir": "./dist",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
@@ -36,6 +34,16 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "noEmit": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    //prisma docs settings
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ES2023",
+    "esModuleInterop": true,
+    //before prisma
+    //"module": "nodenext",
+    //"target": "esnext",
+    //deprecated
+    //"ignoreDeprecations": "6.0"
   }
 }
