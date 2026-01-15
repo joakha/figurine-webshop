@@ -1,6 +1,8 @@
 import { Button } from "antd"
 import { Navigate, Route, Routes } from "react-router-dom"
 import Header from "./components/Header"
+import AppSignUp from "./components/AppSignUp"
+import AppSignIn from "./components/AppSignIn"
 
 function App() {
   return (
@@ -9,6 +11,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<div><Button type="primary" >hello</Button></div>}></Route>
+          <Route path="/sign-up" element={<AppSignUp />}></Route>
+          <Route path="/sign-in" element={<AppSignIn />}></Route>
           <Route path="/account" element={<div>hi</div>}></Route>
           <Route path="*" element={<Navigate to={"/"} />}></Route>
         </Routes>

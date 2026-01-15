@@ -35,15 +35,15 @@
     "skipLibCheck": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    //prisma docs settings
+    // Prisma docs settings
     "module": "ESNext",
     "moduleResolution": "node",
     "target": "ES2023",
     "esModuleInterop": true,
-    //before prisma
-    //"module": "nodenext",
-    //"target": "esnext",
-    //deprecated
-    //"ignoreDeprecations": "6.0"
+    // Before prisma
+    // "module": "nodenext",
+    // "target": "esnext",
+    // Deprecated
+    // "ignoreDeprecations": "6.0"
   }
 }
