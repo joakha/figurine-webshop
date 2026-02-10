@@ -1,6 +1,6 @@
 import { verifyWebhook } from '@clerk/express/webhooks'
 import type { Request, Response } from 'express'
-import { prisma } from '../app-backend.ts'
+import { prisma } from '../app-backend.js'
 
 const saveClerkAccount = async (req: Request, res: Response) => {
     try {

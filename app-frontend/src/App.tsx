@@ -10,11 +10,11 @@ function App() {
       <div className='flex flex-col min-h-screen bg-slate-200'>
         <Header />
           <Routes>
-            <Route path="/" element={<FrontPage />}></Route>
-            <Route path="/sign-up" element={<AppSignUp />}></Route>
-            <Route path="/sign-in" element={<AppSignIn />}></Route>
+            <Route path="/" element={<FrontPage />} />
+            <Route path="/sign-up" element={<AppSignUp />} />
+            <Route path="/sign-in" element={<AppSignIn />} />
             {/* catch-all route */}
-            <Route path="*" element={<Navigate to={"/"} />}></Route>
+            <Route path="*" element={<Navigate to={"/"} />} />
           </Routes>
         </div>
     </>

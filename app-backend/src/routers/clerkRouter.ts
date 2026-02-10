@@ -1,5 +1,5 @@
 import express from "express"
-import { saveClerkAccount } from "../controllers/clerkController.ts";
+import { saveClerkAccount } from "../controllers/clerkController.js";
 
 const clerkRouter = express.Router();
 

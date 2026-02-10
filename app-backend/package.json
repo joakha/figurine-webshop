@@ -5,10 +5,13 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.ts",
+    "dev": "tsx --watch index.ts",
+    "deploy": "npm install && npx prisma generate && npx tsc",
+    "start": "node dist/index.js",
     "seed": "npx tsx prisma/seed.ts",
     "reset": "npx prisma migrate reset",
-    "migrate": "npx prisma migrate"
+    "migrate": "npx prisma migrate",
+    "generate": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -27,9 +30,8 @@
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.6",
     "@types/pg": "^8.16.0",
-    "nodemon": "^3.1.11",
     "prisma": "^7.2.0",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }

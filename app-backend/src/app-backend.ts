@@ -2,9 +2,9 @@ import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import type { Request, Response } from "express";
-import clerkRouter from "./routers/clerkRouter.ts";
+import clerkRouter from "./routers/clerkRouter.js";
 import { PrismaPg } from '@prisma/adapter-pg'
-import { PrismaClient } from "../prisma/generated/client.ts";
+import { PrismaClient } from "../prisma/generated/client.js";
 import { clerkMiddleware, getAuth } from '@clerk/express'
 
 //setup env variables
