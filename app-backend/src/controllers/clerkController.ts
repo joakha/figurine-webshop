@@ -1,6 +1,6 @@
 import { verifyWebhook } from '@clerk/express/webhooks'
 import type { Request, Response } from 'express'
-import { prisma } from '../app-backend.js'
+import { myPrismaClient } from '../app-backend.js'
 
 const saveClerkAccount = async (req: Request, res: Response) => {
     try {
@@ -12,7 +12,7 @@ const saveClerkAccount = async (req: Request, res: Response) => {
 
         if (eventType === 'user.updated') {
             //clerk is setup so that username and email are required
-            await prisma.account.update({
+            await myPrismaClient.account.update({
                 where: {
                     clerkId: evt.data.id,
                 },
@@ -25,7 +25,7 @@ const saveClerkAccount = async (req: Request, res: Response) => {
         }
         
         if (eventType === 'user.created') {
-            await prisma.account.create({
+            await myPrismaClient.account.create({
                 data: {
                     clerkId: evt.data.id,
                     username: evt.data.username as string,
@@ -36,7 +36,7 @@ const saveClerkAccount = async (req: Request, res: Response) => {
         }
 
         if (evt.type === "user.deleted") {
-            await prisma.account.delete({
+            await myPrismaClient.account.delete({
                 //id should be always defined
                 where: {
                     clerkId: evt.data.id as string

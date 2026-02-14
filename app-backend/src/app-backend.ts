@@ -3,9 +3,11 @@ import cors from "cors"
 import dotenv from "dotenv"
 import type { Request, Response } from "express";
 import clerkRouter from "./routers/clerkRouter.js";
+import itemRouter from "./routers/itemRouter.js";
 import { PrismaPg } from '@prisma/adapter-pg'
-import { PrismaClient } from "../prisma/generated/client.js";
-import { clerkMiddleware, getAuth } from '@clerk/express'
+import { PrismaClient, Prisma } from "../prisma/generated/client.js";
+import { clerkMiddleware } from '@clerk/express'
+import { v2 as cloudinarySDK } from "cloudinary";
 
 //setup env variables
 dotenv.config();
@@ -13,45 +15,35 @@ dotenv.config();
 //connect to db
 const connectionString = `${process.env.DATABASE_URL}`
 const adapter = new PrismaPg({ connectionString })
-const prisma = new PrismaClient({ adapter })
+const myPrismaClient = new PrismaClient({ adapter })
+
+//cloudinary
+cloudinarySDK.config({
+    api_key: process.env.CLOUDINARY_KEY,
+    cloud_name: process.env.CLOUD_NAME,
+    api_secret: process.env.CLOUDINARY_SECRET
+})
 
 //express server
 const appBackend = express();
 
+//middleware
 appBackend.use(clerkMiddleware())
 //webhook expects raw request body, not parsed JSON
 appBackend.use("/api/clerk", clerkRouter)
-
-//middleware
+//parse json for other routes
 appBackend.use(express.json());
 appBackend.use(cors());
 
 //routes
+appBackend.use("/api/item", itemRouter)
+
 appBackend.get("/test", async (req: Request, res: Response) => {
-    res.json({ message: "hello!" })
-})
-
-appBackend.get("/auth-state", (req, res) => {
-    res.json(req.auth())
-})
-
-appBackend.get("/protect", (req, res) => {
-    const { userId } = getAuth(req)
-
-    if (!userId) {
-        return res.status(401).json("unauthorized")
-    }
-
-    return res.json("success")
-})
-
-
-appBackend.get('/users', async (req, res) => {
-    const users = await prisma.account.findMany()
-    res.json(users)
+    res.json({ message: "backend is running!" })
 })
 
 export {
     appBackend,
-    prisma
+    myPrismaClient,
+    Prisma
 }

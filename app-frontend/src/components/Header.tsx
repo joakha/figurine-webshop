@@ -1,16 +1,8 @@
 import { Link } from "react-router-dom"
-import { SignedIn, SignedOut, UserButton, useAuth } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 import { Button } from "antd"
-import { useEffect } from "react";
 
 const Header = () => {
-
-  const { getToken } = useAuth()
-
-  useEffect(() => {
-    getToken().then(token => console.log(token))
-  }, [])
-
   return (
     <header className="bg-red-400 py-8 text-white">
       <div className="flex justify-between items-center">
