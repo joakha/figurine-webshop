@@ -4,11 +4,8 @@ import AppSignUp from "./components/AppSignUp"
 import AppSignIn from "./components/AppSignIn"
 import FrontPage from "./components/FrontPage"
 import AddItem from "./components/AddItem"
-import { API_BASE_URL } from "./constants"
 
 function App() {
-
-  console.log(API_BASE_URL)
   return (
     <>
       <div className='flex flex-col min-h-screen bg-slate-200'>

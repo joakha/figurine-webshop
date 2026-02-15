@@ -1,14 +1,14 @@
 import axios from "axios"
-import { API_BASE_URL } from "../constants"
+import { BACKEND_ADDRESS } from "../constants"
 
-const postItem = async (token: string, newItem: FormData) => {
+const postItem = async (token: string | null, newItem: FormData) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
 
-    const response = await axios.post(`${API_BASE_URL}/api/item`, newItem, config)
+    const response = await axios.post(`${BACKEND_ADDRESS}/api/item`, newItem, config)
     return response.data
 }
 
