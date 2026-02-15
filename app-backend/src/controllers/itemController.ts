@@ -3,6 +3,26 @@ import { myPrismaClient } from '../app-backend.js'
 import cloudinary from "cloudinary"
 import { getDataURI } from '../middleware/pictureUpload.js'
 
+const fetchItem = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        const item = await myPrismaClient.item.findUnique({
+            where: {
+                id: id as string
+            }
+        })
+
+        if (!item) {
+            return res.status(404).json({ error: "resource doesn't exist!" })
+        }
+
+        res.json(item)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ message: "Error getting item" })
+    }
+}
+
 const addItem = async (req: Request, res: Response) => {
     try {
         const itemInDB = await myPrismaClient.item.findUnique({
@@ -45,5 +65,6 @@ const addItem = async (req: Request, res: Response) => {
 }
 
 export {
-    addItem
+    addItem,
+    fetchItem
 }

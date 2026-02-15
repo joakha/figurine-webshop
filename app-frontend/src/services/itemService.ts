@@ -1,7 +1,8 @@
 import axios from "axios"
 import { BACKEND_ADDRESS } from "../constants"
+import type { ItemType } from "../types/FormTypes"
 
-const postItem = async (token: string | null, newItem: FormData) => {
+const postItem = async (token: string | null, newItem: FormData): Promise<ItemType> => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -12,6 +13,13 @@ const postItem = async (token: string | null, newItem: FormData) => {
     return response.data
 }
 
+const fetchItem = async (id: string | undefined): Promise<ItemType> => {
+    const response = await axios.get(`${BACKEND_ADDRESS}/api/item/${id}`)
+    return response.data
+}
+
+
 export default {
-    postItem
+    postItem,
+    fetchItem
 }

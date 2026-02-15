@@ -17,7 +17,19 @@ type ItemFormProps = {
     onFinish: ((values: ItemFormType) => void)
 }
 
+type ItemType = {
+    name: string,
+    description: string,
+    stock: number,
+    price: number,
+    picture: string,
+    category: string,
+    availability: string,
+    estimatedDelivery: string
+};
+
 export type {
     ItemFormType,
-    ItemFormProps
+    ItemFormProps,
+    ItemType
 }
