@@ -3,8 +3,8 @@ import Header from "./components/Header"
 import AppSignUp from "./components/AppSignUp"
 import AppSignIn from "./components/AppSignIn"
 import FrontPage from "./components/FrontPage"
-import AddItem from "./components/AddItem"
-import EditItem from "./components/EditItem"
+import AddProduct from "./components/AddProduct"
+import EditProduct from "./components/EditProduct"
 
 function App() {
   return (
@@ -15,8 +15,8 @@ function App() {
             <Route path="/" element={<FrontPage />} />
             <Route path="/sign-up" element={<AppSignUp />} />
             <Route path="/sign-in" element={<AppSignIn />} />
-            <Route path="/add-item" element={<AddItem />} />
-            <Route path="/edit-item/:itemId" element={<EditItem />} />
+            <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/edit-product/:productId" element={<EditProduct />} />
             {/* catch-all route */}
             <Route path="*" element={<Navigate to={"/"} />} />
           </Routes>

@@ -3,37 +3,37 @@ import { myPrismaClient } from '../app-backend.js'
 import cloudinary from "cloudinary"
 import { getDataURI } from '../middleware/pictureUpload.js'
 
-const fetchItem = async (req: Request, res: Response) => {
+const fetchProduct = async (req: Request, res: Response) => {
     try {
-        const id = req.params.id;
-        const item = await myPrismaClient.item.findUnique({
+        const id = req.params.id as string;
+        const product = await myPrismaClient.product.findUnique({
             where: {
-                id: id as string
+                id: id
             }
         })
 
-        if (!item) {
+        if (!product) {
             return res.status(404).json({ error: "resource doesn't exist!" })
         }
 
-        res.json(item)
+        res.json(product)
     } catch (error) {
         console.error(error)
-        res.status(500).json({ message: "Error getting item" })
+        res.status(500).json({ message: "Error getting product" })
     }
 }
 
-const addItem = async (req: Request, res: Response) => {
+const addProduct = async (req: Request, res: Response) => {
     try {
-        const itemInDB = await myPrismaClient.item.findUnique({
+        const productInDB = await myPrismaClient.product.findUnique({
             where: {
                 name: req.body.name
             }
         })
 
-        if (itemInDB) {
+        if (productInDB) {
             return res.status(409).json({
-                error: "Item with same name already exists!"
+                error: "Product with same name already exists!"
             })
         }
 
@@ -41,30 +41,29 @@ const addItem = async (req: Request, res: Response) => {
         const pictureURI = getDataURI(req.file as Express.Multer.File) as string
         const uploadResponse = await cloudinary.v2.uploader.upload(pictureURI);
 
-        const newItem = {
+        const newProduct = {
             name: req.body.name,
             description: req.body.description,
-            stock: parseInt(req.body.stock) || 0,
             price: parseInt(req.body.price) || 0,
             picture: uploadResponse.url,
             category: req.body.category,
             availability: req.body.availability,
-            estimatedDelivery: req.body.estimatedDelivery
+            timeToDelivery: req.body.timeToDelivery
         }
 
-        await myPrismaClient.item.create({
-            data: newItem
+        await myPrismaClient.product.create({
+            data: newProduct
         });
 
-        res.status(201).send(newItem)
+        res.status(201).send(newProduct)
 
     } catch (error) {
         console.error(error)
-        res.status(500).json({ message: "Error adding item" })
+        res.status(500).json({ message: "Error adding product" })
     }
 }
 
 export {
-    addItem,
-    fetchItem
+    addProduct,
+    fetchProduct
 }

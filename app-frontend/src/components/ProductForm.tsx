@@ -1,10 +1,10 @@
 import { Input, Button, Form, InputNumber, Select, Upload } from "antd"
 import type { UploadFile } from 'antd';
-import { itemAvailabilities, itemCategories, itemEstimatedDeliveries } from "../lib/item";
+import { productAvailabilities, productCategories, productTimeToDeliveryValues } from "../lib/product";
 import { UploadOutlined } from '@ant-design/icons';
-import type { ItemFormProps, ItemFormType } from "../types/FormTypes";
+import type { ProductFormProps, ProductFormType } from "../types/FormTypes";
 
-const ItemForm = ({ form, pictureRequired, onFinish }: ItemFormProps) => {
+const ProductForm = ({ form, pictureRequired, onFinish }: ProductFormProps) => {
 
     //add loading, toast, link, return type for api request here
 
@@ -18,60 +18,49 @@ const ItemForm = ({ form, pictureRequired, onFinish }: ItemFormProps) => {
     return (
         <Form
             form={form}
-            name="addItem"
+            name="productForm"
             layout="vertical"
             style={{ minWidth: 250, maxWidth: 600, width: "100%", padding: "10px" }}
             initialValues={{ stock: 0, price: 0 }}
             onFinish={onFinish}
             autoComplete="off"
         >
-            <Form.Item<ItemFormType>
+            <Form.Item<ProductFormType>
                 label="Name"
                 name="name"
                 rules={[{
                     whitespace: true,
                     required: true,
-                    message: 'Input item name!'
+                    message: 'Input name!'
                 }]}
             >
                 <Input />
             </Form.Item>
 
-            <Form.Item<ItemFormType>
+            <Form.Item<ProductFormType>
                 label="Description"
                 name="description"
                 rules={[{
                     whitespace: true,
                     required: true,
-                    message: 'Input item description!'
+                    message: 'Input description!'
                 }]}
             >
                 <Input.TextArea rows={6} />
             </Form.Item>
 
-            <Form.Item<ItemFormType>
-                label="Stock"
-                name="stock"
-                rules={[{
-                    required: true,
-                    message: 'Input item stock!'
-                }]}
-            >
-                <InputNumber min={0} />
-            </Form.Item>
-
-            <Form.Item<ItemFormType>
+            <Form.Item<ProductFormType>
                 label="Price"
                 name="price"
                 rules={[{
                     required: true,
-                    message: 'Input item price!'
+                    message: 'Input price!'
                 }]}
             >
                 <InputNumber min={0} />
             </Form.Item>
 
-            <Form.Item<ItemFormType>
+            <Form.Item<ProductFormType>
                 label="Picture"
                 name="picture"
                 rules={[{
@@ -91,7 +80,7 @@ const ItemForm = ({ form, pictureRequired, onFinish }: ItemFormProps) => {
                 </Upload>
             </Form.Item>
 
-            <Form.Item<ItemFormType>
+            <Form.Item<ProductFormType>
                 label="Category"
                 name="category"
                 rules={[{
@@ -99,10 +88,10 @@ const ItemForm = ({ form, pictureRequired, onFinish }: ItemFormProps) => {
                     message: 'Select category!'
                 }]}
             >
-                <Select placeholder="Select category" options={itemCategories} />
+                <Select placeholder="Select category" options={productCategories} />
             </Form.Item>
 
-            <Form.Item<ItemFormType>
+            <Form.Item<ProductFormType>
                 label="Availability"
                 name="availability"
                 rules={[{
@@ -110,22 +99,22 @@ const ItemForm = ({ form, pictureRequired, onFinish }: ItemFormProps) => {
                     message: 'Select availability!'
                 }]}
             >
-                <Select placeholder="Select availability" options={itemAvailabilities} />
+                <Select placeholder="Select availability" options={productAvailabilities} />
             </Form.Item>
 
 
-            <Form.Item<ItemFormType>
-                label="Estimated Delivery"
-                name="estimatedDelivery"
+            <Form.Item<ProductFormType>
+                label="Time to Delivery"
+                name="timeToDelivery"
                 rules={[{
                     required: true,
-                    message: 'Select estimated delivery'
+                    message: 'Select time to delivery'
                 }]}
             >
-                <Select placeholder="Select estimated delivery" options={itemEstimatedDeliveries} />
+                <Select placeholder="Select time to delivery" options={productTimeToDeliveryValues} />
             </Form.Item>
 
-            <Form.Item<ItemFormType> label={null}>
+            <Form.Item<ProductFormType> label={null}>
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
@@ -134,4 +123,4 @@ const ItemForm = ({ form, pictureRequired, onFinish }: ItemFormProps) => {
     )
 }
 
-export default ItemForm
+export default ProductForm

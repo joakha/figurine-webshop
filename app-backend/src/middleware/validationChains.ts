@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 import { checkValidationResult } from "./validationFunctions.js";
 
-const validateAddItem = [
+const validateAddProduct = [
   body("name")
     .trim()
     .notEmpty().withMessage("Name required")
@@ -11,10 +11,6 @@ const validateAddItem = [
     .trim()
     .notEmpty().withMessage("Description required")
     .isString().withMessage("Description must be a string"),
-
-  body("stock")
-    .optional()
-    .isInt({ min: 0 }).withMessage("Stock must be >= 0"),
 
   body("price")
     .optional()
@@ -29,14 +25,14 @@ const validateAddItem = [
     .isIn(["IN_STOCK", "WAITING", "OUT_OF_STOCK"])
     .withMessage("Availability must be IN_STOCK, WAITING or OUT_OF_STOCK"),
 
-  body("estimatedDelivery")
+  body("timeToDelivery")
     .trim()
-    .notEmpty().withMessage("Estimated delivery is required")
-    .isString().withMessage("Estimated delivery must be a string"),
+    .notEmpty().withMessage("Time to delivery is required")
+    .isString().withMessage("Time to delivery must be a string"),
 
     checkValidationResult
 ];
 
 export {
-    validateAddItem
+    validateAddProduct
 }

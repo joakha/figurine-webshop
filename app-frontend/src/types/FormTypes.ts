@@ -1,35 +1,33 @@
 import type { FormInstance, UploadFile } from 'antd';
 
-type ItemFormType = {
+type ProductFormType = {
     name: string,
     description: string,
-    stock: number,
     price: number,
     picture: UploadFile<File>[],
     category: string,
     availability: string,
-    estimatedDelivery: string
+    timeToDelivery: string
 };
 
-type ItemFormProps = {
-    form: FormInstance<ItemFormType>,
+type ProductFormProps = {
+    form: FormInstance<ProductFormType>,
     pictureRequired: boolean,
-    onFinish: ((values: ItemFormType) => void)
+    onFinish: ((values: ProductFormType) => void)
 }
 
-type ItemType = {
+type ProductType = {
     name: string,
     description: string,
-    stock: number,
     price: number,
     picture: string,
     category: string,
     availability: string,
-    estimatedDelivery: string
+    timeToDelivery: string
 };
 
 export type {
-    ItemFormType,
-    ItemFormProps,
-    ItemType
+    ProductFormType,
+    ProductFormProps,
+    ProductType
 }
