@@ -4,7 +4,7 @@ import { productAvailabilities, productCategories, productTimeToDeliveryValues }
 import { UploadOutlined } from '@ant-design/icons';
 import type { ProductFormProps, ProductFormType } from "../types/FormTypes";
 
-const ProductForm = ({ form, pictureRequired, onFinish }: ProductFormProps) => {
+const ProductForm = ({ form, onFinish }: ProductFormProps) => {
 
     //add loading, toast, link, return type for api request here
 
@@ -64,7 +64,7 @@ const ProductForm = ({ form, pictureRequired, onFinish }: ProductFormProps) => {
                 label="Picture"
                 name="picture"
                 rules={[{
-                    required: pictureRequired,
+                    required: true,
                     message: "Upload an image!"
                 }]}
                 valuePropName="fileList"

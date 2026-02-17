@@ -44,7 +44,6 @@ const AddProduct = () => {
             <Typography.Title>Add a new product</Typography.Title>
             <ProductForm
                 form={form}
-                pictureRequired={true}
                 onFinish={onFinish}
             />
         </div>

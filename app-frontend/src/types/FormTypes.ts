@@ -12,7 +12,6 @@ type ProductFormType = {
 
 type ProductFormProps = {
     form: FormInstance<ProductFormType>,
-    pictureRequired: boolean,
     onFinish: ((values: ProductFormType) => void)
 }
 

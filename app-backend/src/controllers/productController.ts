@@ -12,9 +12,7 @@ const fetchProduct = async (req: Request, res: Response) => {
             }
         })
 
-        if (!product) {
-            return res.status(404).json({ error: "resource doesn't exist!" })
-        }
+        if (!product) return res.status(404).json({ error: "resource doesn't exist!" })
 
         res.json(product)
     } catch (error) {
@@ -63,7 +61,58 @@ const addProduct = async (req: Request, res: Response) => {
     }
 }
 
+const putProduct = async (req: Request, res: Response) => {
+    try {
+        const productId = req.params.id as string
+
+        const product = await myPrismaClient.product.findUnique({
+            where: {
+                id: productId
+            }
+        })
+
+        if (!product) return res.status(404).json({ error: "resource doesn't exist!" })
+
+        let updatedProduct;
+
+        updatedProduct = await myPrismaClient.product.update({
+            where: {
+                id: productId
+            },
+            data: {
+                name: req.body.name,
+                description: req.body.description,
+                price: parseInt(req.body.price) || 0,
+                category: req.body.category,
+                availability: req.body.availability,
+                timeToDelivery: req.body.timeToDelivery
+            }
+        })
+
+        if (req.file) {
+            //realistically if multer hasnt thrown an error before this function return value should be string
+            const pictureURI = getDataURI(req.file as Express.Multer.File) as string
+            const uploadResponse = await cloudinary.v2.uploader.upload(pictureURI);
+
+            updatedProduct = await myPrismaClient.product.update({
+                where: {
+                    id: productId
+                },
+                data: {
+                    picture: uploadResponse.url
+                }
+            })
+        }
+
+        res.json(updatedProduct)
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ message: "Error updating product" })
+    }
+}
+
 export {
     addProduct,
-    fetchProduct
+    fetchProduct,
+    putProduct
 }

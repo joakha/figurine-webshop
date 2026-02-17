@@ -30,6 +30,15 @@ const EditProduct = () => {
                 category: data.category,
                 availability: data.availability,
                 timeToDelivery: data.timeToDelivery,
+
+                picture: [
+                    {
+                        uid: '-1',
+                        name: 'Current Image',
+                        status: 'done',
+                        url: data.picture,
+                    }
+                ]
             });
         } catch (err) {
             console.error(err);
@@ -47,8 +56,9 @@ const EditProduct = () => {
             productFormData.append("description", values.description);
             productFormData.append("price", values.price.toString());
 
-            //the picture wont be undefined because the form validates that it must exist
-            if (values.picture[0]) {
+            //originFileObj property exists only if a new picture is selected
+            //otherwise can be skipped
+            if (values.picture[0].originFileObj) {
                 productFormData.append("picture", values.picture[0].originFileObj as RcFile);
             }
 
@@ -56,8 +66,8 @@ const EditProduct = () => {
             productFormData.append("availability", values.availability)
             productFormData.append("timeToDelivery", values.timeToDelivery)
 
-            const data = await productService.postProduct(token, productFormData)
-            console.log(data)
+            await productService.putProduct(token, productId, productFormData)
+            fetchProduct();
         } catch (err) {
             const error = err as AxiosError;
             console.log(error.response)
@@ -77,7 +87,6 @@ const EditProduct = () => {
                     <Typography.Title>Edit Product</Typography.Title>
                     <ProductForm
                         form={form}
-                        pictureRequired={false}
                         onFinish={onFinish}
                     />
                 </>
