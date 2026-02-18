@@ -1,5 +1,5 @@
 import express from "express"
-import { upload } from "../middleware/pictureUpload";
+import { upload } from "../middleware/pictureUpload.js";
 import { addProduct, fetchProduct, putProduct } from "../controllers/productController.js";
 import { validateAddProduct } from "../middleware/validationChains.js";
 import { requireAuth } from "@clerk/express";

@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import type { Request, Response } from "express";
 import clerkRouter from "./routers/clerkRouter.js";
 import productRouter from "./routers/productRouter.js";
+import findRouter from "./routers/findRouter.js";
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient, Prisma } from "../prisma/generated/client.js";
 import { clerkMiddleware } from '@clerk/express'
@@ -37,6 +38,7 @@ appBackend.use(cors());
 
 //routes
 appBackend.use("/api/product", productRouter)
+appBackend.use("/api/findProducts", findRouter)
 
 appBackend.get("/test", async (req: Request, res: Response) => {
     res.json({ message: "backend is running!" })

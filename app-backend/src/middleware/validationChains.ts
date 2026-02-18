@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, query } from "express-validator";
 import { checkValidationResult } from "./validationFunctions.js";
 
 const validateAddProduct = [
@@ -30,9 +30,33 @@ const validateAddProduct = [
     .notEmpty().withMessage("Time to delivery is required")
     .isString().withMessage("Time to delivery must be a string"),
 
-    checkValidationResult
+  checkValidationResult
 ];
 
+const validateFindQuery = [
+  query("name")
+    .trim()
+    .notEmpty().withMessage("Query is required")
+    .isString().withMessage("Query must be a string"),
+
+  query("category")
+    .optional()
+    .isIn(["FANTASY", "SCIFI"])
+    .withMessage("Category doesn't exist!"),
+
+  query("priceOption")
+    .trim()
+    .notEmpty().withMessage("priceOption is required")
+    .isIn(["HIGHEST", "LOWEST"]).withMessage("priceOption must be HIGHEST OR LOWEST"),
+
+  query("pageNo")
+    .optional()
+    .isInt({ min: 1 }).withMessage("pageNo query must be > 0"),
+
+  checkValidationResult
+]
+
 export {
-    validateAddProduct
+  validateAddProduct,
+  validateFindQuery
 }

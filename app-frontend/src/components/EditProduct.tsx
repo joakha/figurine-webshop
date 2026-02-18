@@ -1,6 +1,5 @@
 import { Form, Typography } from 'antd';
 import type { FormProps } from 'antd';
-import type { RcFile } from "antd/es/upload";
 import productService from "../services/productService";
 import type { AxiosError } from "axios";
 import ProductForm from './ProductForm';
@@ -59,7 +58,7 @@ const EditProduct = () => {
             //originFileObj property exists only if a new picture is selected
             //otherwise can be skipped
             if (values.picture[0].originFileObj) {
-                productFormData.append("picture", values.picture[0].originFileObj as RcFile);
+                productFormData.append("picture", values.picture[0].originFileObj);
             }
 
             productFormData.append("category", values.category)
