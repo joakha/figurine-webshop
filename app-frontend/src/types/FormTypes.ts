@@ -25,8 +25,16 @@ type ProductType = {
     timeToDelivery: string
 };
 
+type ProductFindType = {
+    products: ProductType[],
+    totalProducts: string,
+    currentPage: string,
+    totalPages: string
+}
+
 export type {
     ProductFormType,
     ProductFormProps,
-    ProductType
+    ProductType,
+    ProductFindType
 }

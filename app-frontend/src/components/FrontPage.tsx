@@ -1,9 +1,9 @@
-import { Button } from 'antd'
+import ProductQueryInput from "./ProductQueryInput"
 
 const FrontPage = () => {
     return (
-        <div className="flex flex-1 justify-center mt-20">
-            <Button type="primary">hello</Button>
+        <div className='flex justify-center my-20'>
+            <ProductQueryInput />
         </div>
     )
 }

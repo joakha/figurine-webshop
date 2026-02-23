@@ -22,8 +22,7 @@ const validateAddProduct = [
 
   body("availability")
     .optional()
-    .isIn(["IN_STOCK", "WAITING", "OUT_OF_STOCK"])
-    .withMessage("Availability must be IN_STOCK, WAITING or OUT_OF_STOCK"),
+    .isIn(["IN_STOCK", "WAITING", "OUT_OF_STOCK"]).withMessage("Availability must be IN_STOCK, WAITING or OUT_OF_STOCK"),
 
   body("timeToDelivery")
     .trim()
@@ -35,14 +34,12 @@ const validateAddProduct = [
 
 const validateFindQuery = [
   query("name")
-    .trim()
-    .notEmpty().withMessage("Query is required")
+    .optional()
     .isString().withMessage("Query must be a string"),
 
   query("category")
     .optional()
-    .isIn(["FANTASY", "SCIFI"])
-    .withMessage("Category doesn't exist!"),
+    .isIn(["FANTASY", "SCIFI"]).withMessage("Category doesn't exist!"),
 
   query("priceOption")
     .trim()

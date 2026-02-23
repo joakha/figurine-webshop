@@ -15,8 +15,15 @@ const productTimeToDeliveryValues = [
     { value: "11 to 20 days", label: "11 to 20 days" },
 ]
 
+const productPriceSortingOptions = [
+    { value: 'disabled', label: 'Price', disabled: true },
+    { value: "HIGHEST", label: "Highest" },
+    { value: "LOWEST", label: "Lowest" },
+]
+
 export {
     productCategories,
     productAvailabilities,
-    productTimeToDeliveryValues
+    productTimeToDeliveryValues,
+    productPriceSortingOptions
 }
