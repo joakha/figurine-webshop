@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom"
 import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 import { Button } from "antd"
+import { useUser } from "@clerk/clerk-react";
 
 const Header = () => {
+
+  const { user } = useUser();
+
+  const role = user?.publicMetadata?.userRole;
+
   return (
     <header className="bg-red-400 py-8 text-white">
       <div className="flex justify-between items-center">
@@ -17,6 +23,10 @@ const Header = () => {
             </Link>
           </SignedOut>
           <SignedIn>
+            {role === "admin" &&
+              <Link to={"/add-product"}>
+                <Button type="primary">Add a new Product</Button>
+              </Link>}
             <UserButton />
           </SignedIn>
         </div>
