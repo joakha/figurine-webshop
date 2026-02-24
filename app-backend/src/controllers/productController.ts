@@ -2,6 +2,8 @@ import type { Request, Response } from 'express'
 import { myPrismaClient } from '../app-backend.js'
 import cloudinary from "cloudinary"
 import { getDataURI } from '../middleware/pictureUpload.js'
+import { getAuth } from '@clerk/express'
+import type { UserMetaData } from '../../types/types.js'
 
 const fetchProduct = async (req: Request, res: Response) => {
     try {
@@ -23,8 +25,11 @@ const fetchProduct = async (req: Request, res: Response) => {
 
 const addProduct = async (req: Request, res: Response) => {
     try {
-        
+        const authObject = getAuth(req);
 
+        const metadata = authObject.sessionClaims?.metadata as UserMetaData;
+
+        if (metadata.userRole !== "admin") return res.status(403).json({ error: "Not authorized" });
 
         const productInDB = await myPrismaClient.product.findUnique({
             where: {
@@ -66,6 +71,12 @@ const addProduct = async (req: Request, res: Response) => {
 
 const putProduct = async (req: Request, res: Response) => {
     try {
+        const authObject = getAuth(req);
+
+        const metadata = authObject.sessionClaims?.metadata as UserMetaData;
+
+        if (metadata.userRole !== "admin") return res.status(403).json({ error: "Not authorized" });
+
         const productId = req.params.id as string
 
         const product = await myPrismaClient.product.findUnique({
