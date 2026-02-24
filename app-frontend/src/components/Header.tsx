@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <header className="bg-red-400 py-8 text-white">
       <div className="flex justify-between items-center">
-        <div className="pl-10">Welcome!</div>
+        <div className="pl-10">{user?.username}</div>
 
         <Link className="font-bold text-2xl" to={"/"}>Webshop Project</Link>
 

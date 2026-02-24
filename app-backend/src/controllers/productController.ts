@@ -23,6 +23,9 @@ const fetchProduct = async (req: Request, res: Response) => {
 
 const addProduct = async (req: Request, res: Response) => {
     try {
+        
+
+
         const productInDB = await myPrismaClient.product.findUnique({
             where: {
                 name: req.body.name
