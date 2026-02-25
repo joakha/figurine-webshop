@@ -44,17 +44,6 @@ appBackend.get("/test", async (req: Request, res: Response) => {
     res.json({ message: "backend is running!" })
 })
 
-appBackend.get("/test-db", async (req, res) => {
-  try {
-    const products = await myPrismaClient.product.findMany();
-    res.status(200).json(products)
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Database connection failed ❌");
-  }
-});
-
-
 export {
     appBackend,
     myPrismaClient,
