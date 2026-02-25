@@ -6,7 +6,7 @@ import clerkRouter from "./routers/clerkRouter.js";
 import productRouter from "./routers/productRouter.js";
 import findRouter from "./routers/findRouter.js";
 import { PrismaPg } from '@prisma/adapter-pg'
-import { PrismaClient, Prisma } from "../prisma/generated/client.js";
+import { PrismaClient } from "../prisma/generated/client.js";
 import { clerkMiddleware } from '@clerk/express'
 import { v2 as cloudinarySDK } from "cloudinary";
 
@@ -47,5 +47,4 @@ appBackend.get("/test", async (req: Request, res: Response) => {
 export {
     appBackend,
     myPrismaClient,
-    Prisma
 }

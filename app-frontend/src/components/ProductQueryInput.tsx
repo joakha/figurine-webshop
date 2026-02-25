@@ -11,7 +11,7 @@ const ProductQueryInput = () => {
 
     const { Search: Query } = Input;
 
-    const [productName, setProductName] = useState<string>("kylla");
+    const [productName, setProductName] = useState<string>("");
     const [productCategory, setProductCategory] = useState<string>("");
     const [priceOption, setPriceOption] = useState<string>("HIGHEST");
     const [pageNo, setPageNo] = useState<string>("");

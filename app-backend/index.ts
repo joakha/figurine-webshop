@@ -1,5 +1,5 @@
 import { appBackend } from "./src/app-backend.js";
 
-appBackend.listen(7000, () => {
-    console.log("Server started on localhost:7000");
+appBackend.listen(3000, () => {
+    console.log("Server started in port: 3000");
 });
