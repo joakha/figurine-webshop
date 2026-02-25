@@ -4,4 +4,5 @@ const port = process.env.PORT || 3000
 
 appBackend.listen(port, () => {
     console.log(`Server started in port: ${port}`);
+    console.log(process.env.DATABASE_URL + "hello")
 });
