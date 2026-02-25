@@ -37,7 +37,9 @@ const ProductQueryInput = () => {
     const fetchProducts = async () => {
         try {
             const productData = await productService.fetchProducts(productName, productCategory, priceOption, pageNo);
-            console.log(productData.products)
+            setFoundProducts(productData.products)
+            console.log(foundProducts)
+            setPageNo("1")
         } catch (error) {
             console.log(error)
         }

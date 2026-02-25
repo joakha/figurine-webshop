@@ -1,5 +1,5 @@
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
-const BACKEND_ADDRESS = import.meta.env.VITE_API_BASE_URL
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const BACKEND_ADDRESS = import.meta.env.VITE_API_BASE_URL || "";
 
 export {
     PUBLISHABLE_KEY,

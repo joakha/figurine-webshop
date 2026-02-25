@@ -9,6 +9,7 @@ import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from "../prisma/generated/client.js";
 import { clerkMiddleware } from '@clerk/express'
 import { v2 as cloudinarySDK } from "cloudinary";
+import path from "path";
 
 //setup env variables
 dotenv.config();
@@ -36,12 +37,20 @@ appBackend.use("/api/clerk", clerkRouter)
 appBackend.use(express.json());
 appBackend.use(cors());
 
+//serve built frontend static files
+appBackend.use(express.static(path.join(process.cwd(), "../app-frontend/dist")));
+
 //routes
 appBackend.use("/api/product", productRouter)
 appBackend.use("/api/findProducts", findRouter)
 
 appBackend.get("/test", async (req: Request, res: Response) => {
     res.json({ message: "backend is running!" })
+})
+
+//route all unmatched requests
+appBackend.get('/{*any}', (req: Request, res: Response) => {
+    res.sendFile(path.join(process.cwd(), "../app-frontend/dist/index.html"))
 })
 
 export {
