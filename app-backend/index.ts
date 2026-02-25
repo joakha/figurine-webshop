@@ -1,5 +1,7 @@
 import { appBackend } from "./src/app-backend.js";
 
-appBackend.listen(3000, () => {
-    console.log("Server started in port: 3000");
+const port = process.env.PORT || 3000
+
+appBackend.listen(port, () => {
+    console.log(`Server started in port: ${port}`);
 });
