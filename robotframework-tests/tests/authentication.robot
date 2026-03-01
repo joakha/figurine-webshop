@@ -71,16 +71,16 @@ the sign in form is displayed
 
 the user enters correct email
     Wait For Elements State    css=#identifier-field    visible
-    Fill Text    css=#identifier-field    ${testuser_name}
+    Fill Secret    css=#identifier-field    $testuser_name
     Click        text="Continue"
 
 the user enters correct password
     Wait For Elements State    css=#password-field    visible
-    Fill Text    css=#password-field    ${testuser_password}
+    Fill Secret    css=#password-field    $testuser_password
     Click        text="Continue"
 
 the user is signed in
-    Wait For Elements State    text=${testuser_name}    visible
+    Wait For Elements State    text=Webshop Project    visible
 
 the user can sign in
     the sign in form is displayed
