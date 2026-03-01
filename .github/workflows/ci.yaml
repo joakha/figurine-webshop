@@ -43,7 +43,7 @@ jobs:
           CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
           CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
         working-directory: app-backend
-        run: npm run deploy
+        run: npm run deploy-ci
 
       - name: Upload Build Artifacts 
         uses: actions/upload-artifact@v4 
