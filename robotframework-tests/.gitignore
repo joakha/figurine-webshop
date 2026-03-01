@@ -1,2 +1,3 @@
 tests/variables.py
 tests/__pycache__
+tests/my_authentication.robot
