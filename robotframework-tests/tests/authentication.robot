@@ -7,9 +7,6 @@ ${testuser_name}    %{USERNAME}
 ${testuser_password}    %{PASSWORD}
 
 *** Test Cases ***
-The Application is Woken Up
-    Given the application is woken up before tests
-
 The Front page is displayed
     Given the user navigates to the front page address
     When the front page page is loaded
@@ -34,10 +31,6 @@ The user can sign out
     Then the user is signed out
 
 *** Keywords ***
-the application is woken up before tests
-    New Page    ${frontend_url}
-    Sleep     120s
-
 the user navigates to the front page address
     New Page    ${frontend_url}
 
