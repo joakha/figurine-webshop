@@ -53,8 +53,6 @@ jobs:
             app-frontend/dist
             app-backend/dist
 
-
-
   robot_tests:
     runs-on: ubuntu-latest
     needs: build_application

@@ -48,6 +48,7 @@ const validateFindQuery = [
 
   query("pageNo")
     .optional()
+    .toInt()
     .isInt({ min: 1 }).withMessage("pageNo query must be > 0"),
 
   checkValidationResult

@@ -15,6 +15,16 @@ type ProductFormProps = {
     onFinish: ((values: ProductFormType) => void)
 }
 
+type ProductCardProps = {
+    product: ProductType
+}
+
+type PaginationBarProps = {
+    current: number,
+    total: number,
+    onChange: (page: number) => void
+}
+
 type ProductType = {
     name: string,
     description: string,
@@ -27,14 +37,15 @@ type ProductType = {
 
 type ProductFindType = {
     products: ProductType[],
-    totalProducts: string,
-    currentPage: string,
-    totalPages: string
+    totalProducts: number,
+    currentPage: number,
 }
 
 export type {
     ProductFormType,
     ProductFormProps,
     ProductType,
-    ProductFindType
+    ProductFindType,
+    ProductCardProps,
+    PaginationBarProps
 }

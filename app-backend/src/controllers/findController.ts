@@ -6,7 +6,7 @@ const findProducts = async (req: Request, res: Response) => {
         const { name, category, priceOption, pageNo } = req.query;
 
         const currentPage = Number(pageNo) || 1;
-        const productsPerPage = 10
+        const productsPerPage = 4
 
         let where: any = {};
 
@@ -40,7 +40,6 @@ const findProducts = async (req: Request, res: Response) => {
             products,
             totalProducts,
             currentPage: products.length > 0 ? currentPage : 1,
-            totalPages: products.length > 0 ? Math.ceil(totalProducts / productsPerPage) : 1,
         });
     } catch (err) {
         console.log(err)
