@@ -1,5 +1,4 @@
-import { useReducer } from "react"
-import type { ReactElement } from "react"
+import { useReducer, type ReactElement } from "react"
 import { ProductCartContext } from "./ProductCartContext"
 import type {
     ComponentChildrenProps,
@@ -7,19 +6,21 @@ import type {
     ProductCartStateActionType,
     ProductInCart,
     ProductCartStateType,
+    ProductType,
+    ProductCartContextType,
 } from "../types/types"
 
-export const useReducerActions: useReducerActionsType = {
-    addProduct: "addProduct",
-    removeProduct: "removeProduct",
-    clearProducts: "clearProducts"
-}
-
 const ProductCartProvider = ({ children }: ComponentChildrenProps): ReactElement => {
+    const useReducerActions: useReducerActionsType = {
+        addProduct: "addProduct",
+        removeProduct: "removeProduct",
+        clearProducts: "clearProducts"
+    }
+
     const reducer = (state: ProductCartStateType, action: ProductCartStateActionType): ProductCartStateType => {
         switch (action.type) {
             case useReducerActions.addProduct:
-                const payloadProduct = action.payload;
+                const payloadProduct = action.payload as ProductType | ProductInCart;
                 const productInCart = state.productCart.find(productInCart => productInCart.id === payloadProduct.id);
                 const filteredCart: ProductInCart[] = state.productCart.filter(productInCart => productInCart.id !== payloadProduct.id);
                 const newProductQuantity: number = productInCart ? productInCart.qty + 1 : 1;
@@ -27,7 +28,7 @@ const ProductCartProvider = ({ children }: ComponentChildrenProps): ReactElement
                 return { ...state, productCart: [...filteredCart, { ...payloadProduct, qty: newProductQuantity }] };
 
             case useReducerActions.removeProduct:
-                const { id } = action.payload;
+                const { id } = action.payload as ProductInCart;
                 localStorage.setItem("productCart", JSON.stringify(state.productCart.filter(productInCart => productInCart.id !== id)));
                 return { ...state, productCart: state.productCart.filter(productInCart => productInCart.id !== id) };
 
@@ -50,11 +51,12 @@ const ProductCartProvider = ({ children }: ComponentChildrenProps): ReactElement
     const productCount = sortedProductCart.reduce((prev, curr) => prev + curr.qty, 0);
     const orderPrice = sortedProductCart.reduce((prev, curr) => prev + curr.qty * curr.price, 0);
 
-    const productCartContextProviderValue = {
+    const productCartContextProviderValue: ProductCartContextType = {
         dispatch,
         sortedProductCart,
         productCount,
         orderPrice,
+        useReducerActions
     }
 
     return (

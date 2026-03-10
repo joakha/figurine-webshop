@@ -1,5 +1,4 @@
-import { Form, Typography } from 'antd';
-import type { FormProps } from 'antd';
+import { Form, Typography, type FormProps } from 'antd';
 import productService from "../services/productService";
 import type { AxiosError } from "axios";
 import ProductForm from './ProductForm';

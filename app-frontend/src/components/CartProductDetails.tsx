@@ -1,11 +1,9 @@
-import type { DescriptionsProps } from "antd";
-import { Image, Button, Descriptions } from "antd"
+import { Image, Button, Descriptions, type DescriptionsProps } from "antd"
 import type { CartProductDetailsProps } from "../types/types";
 import useProductCart from "../hooks/useProductCart";
-import { useReducerActions } from "../context/ProductCartProvider";
 
 const CartProductDetails = ({ cartProduct }: CartProductDetailsProps) => {
-    const { dispatch } = useProductCart();
+    const { dispatch, useReducerActions } = useProductCart();
 
     const items: DescriptionsProps['items'] = [
         {
@@ -55,7 +53,7 @@ const CartProductDetails = ({ cartProduct }: CartProductDetailsProps) => {
             span: 2
         },
         {
-            key: '9',
+            key: '8',
             label: 'Remove from cart',
             children: (
                 <Button onClick={() => dispatch({ type: useReducerActions.removeProduct, payload: cartProduct })}>

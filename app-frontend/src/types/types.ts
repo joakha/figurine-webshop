@@ -66,7 +66,7 @@ type CartProductDetailsProps = {
     cartProduct: ProductInCart
 }
 
-//types for productcartcontext and it's provider component
+//types for productcartcontext and its provider component
 type useReducerActionsType = {
     addProduct: string,
     removeProduct: string,
@@ -75,7 +75,7 @@ type useReducerActionsType = {
 
 type ProductCartStateActionType = {
     type: string,
-    payload: ProductType | ProductInCart
+    payload?: ProductType | ProductInCart
 }
 
 type ProductCartContextType = {
@@ -83,6 +83,7 @@ type ProductCartContextType = {
     sortedProductCart: ProductInCart[],
     productCount: number,
     orderPrice: number,
+    useReducerActions: useReducerActionsType
 }
 
 type ProductCartStateType = {

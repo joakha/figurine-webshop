@@ -1,5 +1,4 @@
-import { Input, Button, Form, InputNumber, Select, Upload } from "antd"
-import type { UploadFile } from 'antd';
+import { Input, Button, Form, InputNumber, Select, Upload, type UploadFile } from "antd"
 import { productAvailabilities, productCategories, productTimeToDeliveryValues } from "../lib/product";
 import { UploadOutlined } from '@ant-design/icons';
 import type { ProductFormProps, ProductFormType } from "../types/types";

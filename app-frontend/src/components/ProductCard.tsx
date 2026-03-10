@@ -2,13 +2,12 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 import type { ProductCardProps } from '../types/types';
 import useProductCart from '../hooks/useProductCart';
-import { useReducerActions } from '../context/ProductCartProvider';
 
 const ProductCard = ({ product }: ProductCardProps) => {
 
     const { Meta } = Card;
 
-    const { dispatch } = useProductCart();
+    const { dispatch, useReducerActions } = useProductCart();
 
     return (
         <Card

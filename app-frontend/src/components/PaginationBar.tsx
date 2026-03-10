@@ -1,7 +1,6 @@
 import { Pagination } from "antd"
 import type { PaginationBarProps } from "../types/types"
 
-
 const PaginationBar = ({ current, total, onChange }: PaginationBarProps) => {
     return (
         <Pagination

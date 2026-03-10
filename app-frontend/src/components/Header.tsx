@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
-import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/clerk-react';
 import { Button } from "antd"
-import { useUser } from "@clerk/clerk-react";
 
 const Header = () => {
 

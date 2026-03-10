@@ -1,5 +1,4 @@
-import { Input, Select } from 'antd';
-import type { GetProps } from 'antd';
+import { Input, Select, type GetProps } from 'antd';
 import { productPriceSortingOptions, productCategories } from '../lib/product';
 import { useState, useEffect } from 'react';
 import type { ProductType } from '../types/types';
