@@ -6,11 +6,12 @@ import FrontPage from "./components/FrontPage"
 import AddProduct from "./components/AddProduct"
 import EditProduct from "./components/EditProduct"
 import AdminRouteWrapper from "./components/AdminRouteWrapper"
+import CartPage from "./components/CartPage"
 
 function App() {
   return (
     <>
-      <div className='flex flex-col min-h-screen bg-slate-200'>
+      <div className='flex flex-col items-center min-h-screen bg-slate-200'>
         <Header />
         <Routes>
           {/* admin routes */}
@@ -34,6 +35,7 @@ function App() {
           <Route path="/" element={<FrontPage />} />
           <Route path="/sign-up" element={<AppSignUp />} />
           <Route path="/sign-in" element={<AppSignIn />} />
+          <Route path="/your-cart" element={<CartPage />} />
           {/* catch-all route */}
           <Route path="*" element={<Navigate to={"/"} replace />} />
         </Routes>

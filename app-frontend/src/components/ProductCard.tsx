@@ -20,7 +20,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
                 />
             }
             actions={[
-                <ShoppingCartOutlined key="" onClick={() => dispatch({type : useReducerActions.addProduct, payload: product})} />,
+                <ShoppingCartOutlined
+                    key=""
+                    onClick={() => dispatch({ type: useReducerActions.addProduct, payload: product })}
+                />,
                 <span>{product.price}e</span>,
                 <span>{product.category}</span>
             ]}

@@ -24,18 +24,15 @@ const ProductCartProvider = ({ children }: ComponentChildrenProps): ReactElement
                 const filteredCart: ProductInCart[] = state.productCart.filter(productInCart => productInCart.id !== payloadProduct.id);
                 const newProductQuantity: number = productInCart ? productInCart.qty + 1 : 1;
                 localStorage.setItem("productCart", JSON.stringify([...filteredCart, { ...payloadProduct, qty: newProductQuantity }]));
-                console.log(localStorage.getItem("productCart"))
                 return { ...state, productCart: [...filteredCart, { ...payloadProduct, qty: newProductQuantity }] };
 
             case useReducerActions.removeProduct:
                 const { id } = action.payload;
                 localStorage.setItem("productCart", JSON.stringify(state.productCart.filter(productInCart => productInCart.id !== id)));
-                console.log(localStorage.getItem("productCart"))
                 return { ...state, productCart: state.productCart.filter(productInCart => productInCart.id !== id) };
 
             case useReducerActions.clearProducts:
                 localStorage.removeItem("productCart");
-                console.log(localStorage.getItem("productCart"))
                 return { ...state, productCart: [] };
 
             default:
@@ -50,13 +47,13 @@ const ProductCartProvider = ({ children }: ComponentChildrenProps): ReactElement
     const [state, dispatch] = useReducer(reducer, initCartState);
 
     const sortedProductCart: ProductInCart[] = state.productCart.sort((a: ProductInCart, b: ProductInCart) => a.name.localeCompare(b.name));
-    const purchaseCount = sortedProductCart.reduce((prev, curr) => prev + curr.qty, 0);
+    const productCount = sortedProductCart.reduce((prev, curr) => prev + curr.qty, 0);
     const orderPrice = sortedProductCart.reduce((prev, curr) => prev + curr.qty * curr.price, 0);
 
     const productCartContextProviderValue = {
         dispatch,
         sortedProductCart,
-        purchaseCount,
+        productCount,
         orderPrice,
     }
 

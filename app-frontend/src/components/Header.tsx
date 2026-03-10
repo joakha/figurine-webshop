@@ -10,7 +10,7 @@ const Header = () => {
   const role = user?.publicMetadata?.userRole;
 
   return (
-    <header className="bg-red-400 py-8 text-white">
+    <header className="bg-red-400 py-8 text-white w-full">
       <div className="flex justify-between items-center">
         <div className="pl-10">{user?.username}</div>
 

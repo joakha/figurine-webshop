@@ -71,13 +71,13 @@ type useReducerActionsType = {
 
 type ProductCartStateActionType = {
     type: string,
-    payload: ProductType
+    payload: ProductType | ProductInCart
 }
 
 type ProductCartContextType = {
     dispatch: React.Dispatch<ProductCartStateActionType>,
     sortedProductCart: ProductInCart[],
-    purchaseCount: number,
+    productCount: number,
     orderPrice: number,
 }
 
