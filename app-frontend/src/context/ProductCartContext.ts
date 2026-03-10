@@ -4,7 +4,7 @@ import type { ProductCartContextType } from "../types/types";
 const initProductCartContextState: ProductCartContextType = {
     dispatch: () => { },
     sortedProductCart: [],
-    purchaseCount: 0,
+    productCount: 0,
     orderPrice: 0,
 }
 

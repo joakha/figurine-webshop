@@ -62,6 +62,10 @@ type ComponentChildrenProps = {
     children: ReactNode;
 };
 
+type CartProductDetailsProps = {
+    cartProduct: ProductInCart
+}
+
 //types for productcartcontext and it's provider component
 type useReducerActionsType = {
     addProduct: string,
@@ -97,5 +101,6 @@ export type {
     ProductCartStateType,
     ProductCartStateActionType,
     ProductInCart,
-    ProductCartContextType
+    ProductCartContextType,
+    CartProductDetailsProps
 }
