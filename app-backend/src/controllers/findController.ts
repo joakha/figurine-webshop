@@ -6,7 +6,7 @@ const findProducts = async (req: Request, res: Response) => {
         const { name, category, priceOption, pageNo } = req.query;
 
         const currentPage = Number(pageNo) || 1;
-        const productsPerPage = 4
+        const productsPerPage = 4;
 
         let where: any = {};
 
@@ -15,16 +15,14 @@ const findProducts = async (req: Request, res: Response) => {
             mode: "insensitive"
         }
 
-        if (category) {
-            where.category = category;
-        }
+        if (category) where.category = category;
 
         let orderBy: any = {};
 
         if (priceOption === "HIGHEST") {
-            orderBy = { price: "desc" };
-        } else if (priceOption === "LOWEST") {
-            orderBy = { price: "asc" };
+            orderBy.price = "desc";
+        } else {
+            orderBy.price = "asc";
         }
 
         const products = await myPrismaClient.product.findMany({

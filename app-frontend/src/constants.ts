@@ -3,5 +3,5 @@ const BACKEND_ADDRESS = import.meta.env.VITE_API_BASE_URL || "";
 
 export {
     PUBLISHABLE_KEY,
-    BACKEND_ADDRESS
+    BACKEND_ADDRESS,
 }

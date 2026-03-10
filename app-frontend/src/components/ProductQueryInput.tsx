@@ -2,7 +2,7 @@ import { Input, Select } from 'antd';
 import type { GetProps } from 'antd';
 import { productPriceSortingOptions, productCategories } from '../lib/product';
 import { useState, useEffect } from 'react';
-import type { ProductType } from '../types/FormTypes';
+import type { ProductType } from '../types/types';
 import productService from '../services/productService';
 import ProductCard from './ProductCard';
 import PaginationBar from './PaginationBar';

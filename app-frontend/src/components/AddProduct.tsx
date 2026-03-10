@@ -4,7 +4,7 @@ import type { RcFile } from "antd/es/upload";
 import productService from "../services/productService";
 import type { AxiosError } from "axios";
 import ProductForm from './ProductForm'
-import type { ProductFormType } from '../types/FormTypes';
+import type { ProductFormType } from '../types/types';
 import { useAuth } from "@clerk/clerk-react";
 
 const AddProduct = () => {

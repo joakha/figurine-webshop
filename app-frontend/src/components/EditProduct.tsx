@@ -3,7 +3,7 @@ import type { FormProps } from 'antd';
 import productService from "../services/productService";
 import type { AxiosError } from "axios";
 import ProductForm from './ProductForm';
-import type { ProductFormType } from '../types/FormTypes';
+import type { ProductFormType } from '../types/types';
 import { useAuth } from "@clerk/clerk-react";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -90,7 +90,6 @@ const EditProduct = () => {
                     />
                 </>
             )}
-
         </div>
     )
 }

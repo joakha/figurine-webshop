@@ -1,6 +1,6 @@
 import axios from "axios"
 import { BACKEND_ADDRESS } from "../constants"
-import type { ProductType, ProductFindType } from "../types/FormTypes"
+import type { ProductType, ProductFindType } from "../types/types"
 
 const postProduct = async (token: string | null, newProduct: FormData): Promise<ProductType> => {
     const config = {
