@@ -11,7 +11,7 @@ import CartPage from "./components/CartPage"
 function App() {
   return (
     <>
-      <div className='flex flex-col items-center min-h-screen bg-slate-200'>
+      <div className='flex flex-col min-h-screen bg-slate-200'>
         <Header />
         <Routes>
           {/* admin routes */}

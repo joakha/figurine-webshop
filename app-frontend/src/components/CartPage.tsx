@@ -1,9 +1,35 @@
 import { Button, Typography } from "antd";
 import useProductCart from "../hooks/useProductCart"
 import CartProductDetails from "./CartProductDetails";
+import stripeService from "../services/stripeService";
+import type { StripeSession } from "../types/types";
+import { useAuth } from "@clerk/clerk-react";
 
 const CartPage = () => {
+    const { getToken } = useAuth();
+
     const { sortedProductCart, productCount, orderPrice } = useProductCart();
+
+    const makePurchase = async () => {
+        const purchaseData: StripeSession = {
+            cartProducts: sortedProductCart,
+            productCount: productCount,
+            deliveryDetails: {
+                email: "testemail@test.com"
+            },
+            totalPrice: orderPrice
+        }
+
+        try {
+            const token = await getToken();
+
+            const data = await stripeService.postPurchase(token, purchaseData);
+
+            window.location.href = data.url;
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     return (
         <div className='flex grow flex-col items-center mt-5'>
@@ -14,7 +40,7 @@ const CartPage = () => {
             <div className="flex flex-col items-center mt-5 mb-20 gap-5">
                 <div className="font-bold text-2xl">Total Product Count: {productCount}</div>
                 <div className="font-bold text-2xl">Order Price: {orderPrice}e</div>
-                <Button>Go to checkout</Button>
+                <Button onClick={makePurchase}>Go to checkout</Button>
             </div>
         </div>
     )

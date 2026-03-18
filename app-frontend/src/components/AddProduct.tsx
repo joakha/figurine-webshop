@@ -1,4 +1,4 @@
-import { Form, Typography, type FormProps } from 'antd';
+import { Form, type FormProps } from 'antd';
 import type { RcFile } from "antd/es/upload";
 import productService from "../services/productService";
 import type { AxiosError } from "axios";
@@ -39,12 +39,15 @@ const AddProduct = () => {
     };
 
     return (
-        <div className='flex flex-1 flex-col items-center my-20'>
-            <Typography.Title>Add a new product</Typography.Title>
-            <ProductForm
-                form={form}
-                onFinish={onFinish}
-            />
+        <div className='flex flex-1 flex-col items-center p-10'>
+            <h2 className='text-2xl font-bold p-10 text-gray-600'>Add a new product</h2>
+            <div className="mb-5 w-full min-w-62.5 max-w-150 bg-slate-300 p-10 rounded-2xl">
+                <ProductForm
+                    form={form}
+                    onFinish={onFinish}
+                />
+            </div>
+
         </div>
     )
 }

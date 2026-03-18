@@ -90,6 +90,21 @@ type ProductCartStateType = {
     productCart: ProductInCart[],
 }
 
+//types for stripe
+type StripeSession = {
+  cartProducts: ProductInCart[],
+  deliveryDetails: DeliveryDetailsInput,
+  totalPrice: number,
+  productCount : number
+}
+
+type DeliveryDetailsInput = {
+  email: string;
+  name?: string;
+  addressLine1?: string;
+  city?: string;
+}
+
 export type {
     ProductFormType,
     ProductFormProps,
@@ -103,5 +118,6 @@ export type {
     ProductCartStateActionType,
     ProductInCart,
     ProductCartContextType,
-    CartProductDetailsProps
+    CartProductDetailsProps,
+    StripeSession
 }

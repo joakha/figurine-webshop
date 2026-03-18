@@ -14,13 +14,14 @@ datasource db {
 }
 
 model Account {
-  id       String   @id @default(cuid())
-  clerkId  String   @unique
-  username String   @unique
-  email    String   @unique
-  picture  String?
-  created  DateTime @default(now())
-  updated  DateTime @updatedAt
+  id        String     @id @default(cuid())
+  clerkId   String     @unique
+  username  String     @unique
+  email     String     @unique
+  picture   String?
+  created   DateTime   @default(now())
+  updated   DateTime   @updatedAt
+  purchases Purchase[]
 }
 
 model Product {
@@ -33,7 +34,52 @@ model Product {
   category     Category
   availability Availability @default(IN_STOCK)
 
-  timeToDelivery String
+  timeToDelivery   String
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  purchaseProducts PurchaseProduct[]
+}
+
+model Purchase {
+  id        String  @id @default(cuid())
+  account   Account @relation(fields: [accountId], references: [id])
+  accountId String
+
+  deliveryDetails DeliveryDetails?
+
+  products   PurchaseProduct[]
+  totalCount Int
+  status     PurchaseStatus    @default(PLACED)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PurchaseProduct {
+  id         String   @id @default(cuid())
+  purchase   Purchase @relation(fields: [purchaseId], references: [id])
+  purchaseId String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  qty  Int
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DeliveryDetails {
+  id         String   @id @default(cuid())
+  purchase   Purchase @relation(fields: [purchaseId], references: [id])
+  purchaseId String   @unique
+
+  email        String
+  name         String?
+  addressLine1 String?
+  city         String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -47,4 +93,12 @@ enum Availability {
 enum Category {
   FANTASY
   SCIFI
+}
+
+enum PurchaseStatus {
+  PLACED
+  PAID
+  IN_PROGRESS
+  OUT_FOR_DELIVERY
+  DELIVERED
 }

@@ -19,7 +19,6 @@ const ProductForm = ({ form, onFinish }: ProductFormProps) => {
             form={form}
             name="productForm"
             layout="vertical"
-            style={{ minWidth: 250, maxWidth: 600, width: "100%", padding: "10px" }}
             initialValues={{ stock: 0, price: 0 }}
             onFinish={onFinish}
             autoComplete="off"
@@ -114,7 +113,7 @@ const ProductForm = ({ form, onFinish }: ProductFormProps) => {
             </Form.Item>
 
             <Form.Item<ProductFormType> label={null}>
-                <Button type="primary" htmlType="submit">
+                <Button color="default" variant="solid" htmlType="submit">
                     Submit
                 </Button>
             </Form.Item>

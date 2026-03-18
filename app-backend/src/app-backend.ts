@@ -5,19 +5,21 @@ import type { Request, Response } from "express";
 import clerkRouter from "./routers/clerkRouter.js";
 import productRouter from "./routers/productRouter.js";
 import findRouter from "./routers/findRouter.js";
+import stripeRouter from "./routers/stripeRouter.js";
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from "../prisma/generated/client.js";
 import { clerkMiddleware } from '@clerk/express'
 import { v2 as cloudinarySDK } from "cloudinary";
 import path from "path";
+import Stripe from "stripe";
 
 //setup env variables
 dotenv.config();
 
 //connect to db
-const connectionString = `${process.env.DATABASE_URL}`
-const adapter = new PrismaPg({ connectionString })
-const myPrismaClient = new PrismaClient({ adapter })
+const connectionString = `${process.env.DATABASE_URL}`;
+const adapter = new PrismaPg({ connectionString });
+const myPrismaClient = new PrismaClient({ adapter });
 
 //cloudinary
 cloudinarySDK.config({
@@ -25,6 +27,9 @@ cloudinarySDK.config({
     cloud_name: process.env.CLOUD_NAME,
     api_secret: process.env.CLOUDINARY_SECRET
 })
+
+//Stripe
+const stripeConnection = new Stripe(process.env.STRIPE_KEY as string);
 
 //express server
 const appBackend = express();
@@ -41,8 +46,9 @@ appBackend.use(cors());
 appBackend.use(express.static(path.join(process.cwd(), "../app-frontend/dist")));
 
 //routes
-appBackend.use("/api/product", productRouter)
-appBackend.use("/api/findProducts", findRouter)
+appBackend.use("/api/product", productRouter);
+appBackend.use("/api/findProducts", findRouter);
+appBackend.use("/api/stripe", stripeRouter);
 
 appBackend.get("/test", async (req: Request, res: Response) => {
     res.json({ message: "backend is running!" })
@@ -56,4 +62,5 @@ appBackend.get('/{*any}', (req: Request, res: Response) => {
 export {
     appBackend,
     myPrismaClient,
+    stripeConnection
 }
