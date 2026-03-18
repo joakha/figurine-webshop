@@ -1,6 +1,6 @@
 import express from "express"
 import { requireAuth } from "@clerk/express";
-import { createCheckoutSession } from "../controllers/stripeController";
+import { createCheckoutSession } from "../controllers/stripeController.js";
 
 const stripeRouter = express.Router();
 
