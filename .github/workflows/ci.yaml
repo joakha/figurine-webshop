@@ -103,6 +103,8 @@ jobs:
           CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
           CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
           CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
+          FRONTEND_ADDRESS: ${{ secrets.FRONTEND_ADDRESS }}
+          STRIPE_KEY: ${{ secrets.STRIPE_KEY }}
         working-directory: app-backend
         run: |
           nohup npm run start &
