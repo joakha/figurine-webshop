@@ -92,18 +92,47 @@ type ProductCartStateType = {
 
 //types for stripe
 type StripeSession = {
-  cartProducts: ProductInCart[],
-  deliveryDetails: DeliveryDetailsInput,
-  totalPrice: number,
-  productCount : number
+    cartProducts: ProductInCart[],
+    deliveryDetails: DeliveryDetailsInput,
+    totalPrice: number,
+    productCount: number
 }
 
 type DeliveryDetailsInput = {
-  email: string;
-  name?: string;
-  addressLine1?: string;
-  city?: string;
+    email: string;
+    name?: string;
+    addressLine1?: string;
+    city?: string;
 }
+
+//types for account purchases
+type DeliveryInfo = {
+    id: string,
+    name?: string,
+    email: string,
+    addressLine1?: string,
+    city?: string,
+    purchaseId: string
+}
+
+type PurchaseProduct = {
+    id: string,
+    name: string,
+    productId: string,
+    purchaseId: string,
+    qty: number
+}
+
+type AccountPurchase = {
+    id: string,
+    accountId: string,
+    totalCount: number,
+    deliveryDetails: DeliveryInfo
+    products: PurchaseProduct[];
+    status: "PLACED" | "PAID" | "IN_PROGRESS" | "OUT_FOR_DELIVERY" | "DELIVERED";
+    createdAt: Date;
+    updatedAt: Date;
+};
 
 export type {
     ProductFormType,
@@ -119,5 +148,6 @@ export type {
     ProductInCart,
     ProductCartContextType,
     CartProductDetailsProps,
-    StripeSession
+    StripeSession,
+    AccountPurchase
 }

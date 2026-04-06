@@ -7,12 +7,52 @@ import dotenv from "dotenv"
 
 dotenv.config();
 
+const stripeUpdateEvent = async (req: Request, res: Response) => {
+    let event;
+
+    try {
+        const sig = req.headers["stripe-signature"];
+        event = stripeConnection.webhooks.constructEvent(
+            req.body,
+            sig as string,
+            process.env.STRIPE_WEBHOOK_SIGNING_SECRET as string
+        );
+    } catch (error: any) {
+        console.log(error);
+        return res.status(400).send(`Webhook error: ${error.message}`);
+    }
+
+    if (event.type === "checkout.session.completed") {
+        const purchase = await myPrismaClient.purchase.findUnique({
+            where: {
+                id: event.data.object.metadata?.purchaseId
+            }
+        })
+
+        if (!purchase) {
+            return res.status(404).json({ message: "Purchase not found" });
+        }
+
+        await myPrismaClient.purchase.update({
+            where: {
+                id: purchase.id
+            },
+            data: {
+                totalCount: event.data.object.amount_total as number,
+                status: "PAID"
+            }
+        });
+    }
+
+    res.status(200).send();
+}
+
 const createCheckoutSession = async (req: Request, res: Response) => {
     try {
         const checkoutSessionRequest: StripeSession = req.body;
 
         const AuthObject = getAuth(req);
-        
+
         const currentUser = await myPrismaClient.account.findUnique({
             where: {
                 clerkId: AuthObject.userId as string
@@ -79,8 +119,7 @@ const createCheckoutSession = async (req: Request, res: Response) => {
                 purchaseId: newPurchase.id,
             },
             success_url: `${process.env.FRONTEND_ADDRESS}/order-status?success=true`,
-            cancel_url: `${
-                process.env.FRONTEND_ADDRESS}/checkout?cancelled=true`,
+            cancel_url: `${process.env.FRONTEND_ADDRESS}/checkout?cancelled=true`,
         });
 
         if (!StripeCheckout.url) {
@@ -95,5 +134,6 @@ const createCheckoutSession = async (req: Request, res: Response) => {
 };
 
 export {
-    createCheckoutSession
+    createCheckoutSession,
+    stripeUpdateEvent
 }

@@ -23,9 +23,53 @@ const productPriceSortingOptions = [
     { value: "LOWEST", label: "Lowest" },
 ]
 
+const statusToStepIndex: Record<string, number> = {
+    "PLACED": 0,
+    "PAID": 1,
+    "IN_PROGRESS": 2,
+    "OUT_FOR_DELIVERY": 3,
+    "DELIVERED": 4,
+};
+
+const statusSteps = [
+    {
+        title: 'Order Placed',
+        content: 'Your order has been placed',
+    },
+    {
+        title: 'Payment Confirmed',
+        content: 'Payment has been received',
+    },
+    {
+        title: 'Preparing Order',
+        content: 'Your order is being prepared',
+    },
+    {
+        title: 'On the way',
+        content: 'Package is on the way',
+    },
+    {
+        title: 'Delivered',
+        content: 'Package delivered successfully',
+    },
+];
+
+const formatDate = (date: Date) => {
+    return new Date(date).toLocaleString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+    })
+}
+
 export {
     productCategories,
     productAvailabilities,
     productTimeToDeliveryValues,
-    productPriceSortingOptions
+    productPriceSortingOptions,
+    statusSteps,
+    statusToStepIndex,
+    formatDate
 }

@@ -15,7 +15,8 @@ const CartPage = () => {
             cartProducts: sortedProductCart,
             productCount: productCount,
             deliveryDetails: {
-                email: "testemail@test.com"
+                email: "testemail@test.com",
+                addressLine1: "testAddress 62a"
             },
             totalPrice: orderPrice
         }

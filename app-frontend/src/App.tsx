@@ -7,6 +7,7 @@ import AddProduct from "./components/AddProduct"
 import EditProduct from "./components/EditProduct"
 import AdminRouteWrapper from "./components/AdminRouteWrapper"
 import CartPage from "./components/CartPage"
+import AccountPurchases from "./components/AccountPurchases"
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/sign-up" element={<AppSignUp />} />
           <Route path="/sign-in" element={<AppSignIn />} />
           <Route path="/your-cart" element={<CartPage />} />
+          <Route path="/your-purchases" element={<AccountPurchases />} />
           {/* catch-all route */}
           <Route path="*" element={<Navigate to={"/"} replace />} />
         </Routes>

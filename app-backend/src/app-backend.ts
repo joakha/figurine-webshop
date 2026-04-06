@@ -2,10 +2,11 @@ import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import type { Request, Response } from "express";
-import clerkRouter from "./routers/clerkRouter.js";
+import webhookRouter from "./routers/webhookRouter.js";
 import productRouter from "./routers/productRouter.js";
 import findRouter from "./routers/findRouter.js";
 import stripeRouter from "./routers/stripeRouter.js";
+import purchaseRouter from "./routers/purchaseRouter.js";
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from "../prisma/generated/client.js";
 import { clerkMiddleware } from '@clerk/express'
@@ -36,23 +37,25 @@ const appBackend = express();
 
 //middleware
 appBackend.use(clerkMiddleware())
-//webhook expects raw request body, not parsed JSON
-appBackend.use("/api/clerk", clerkRouter)
-//parse json for other routes
-appBackend.use(express.json());
 appBackend.use(cors());
 
-//serve built frontend static files
-appBackend.use(express.static(path.join(process.cwd(), "../app-frontend/dist")));
+//webhook expects raw request body, not parsed JSON
+appBackend.use("/api/webhook", webhookRouter)
+//parse json for other routes
+appBackend.use(express.json());
 
 //routes
 appBackend.use("/api/product", productRouter);
 appBackend.use("/api/findProducts", findRouter);
+appBackend.use("/api/accountPurchases", purchaseRouter)
 appBackend.use("/api/stripe", stripeRouter);
 
 appBackend.get("/test", async (req: Request, res: Response) => {
     res.json({ message: "backend is running!" })
 })
+
+//serve built frontend static files
+appBackend.use(express.static(path.join(process.cwd(), "../app-frontend/dist")));
 
 //route all unmatched requests
 appBackend.get('/{*any}', (req: Request, res: Response) => {
