@@ -123,7 +123,7 @@ type PurchaseProduct = {
     qty: number
 }
 
-type AccountPurchase = {
+type Purchase = {
     id: string,
     accountId: string,
     totalCount: number,
@@ -149,5 +149,5 @@ export type {
     ProductCartContextType,
     CartProductDetailsProps,
     StripeSession,
-    AccountPurchase
+    Purchase
 }

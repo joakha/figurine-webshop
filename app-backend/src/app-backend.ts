@@ -47,7 +47,7 @@ appBackend.use(express.json());
 //routes
 appBackend.use("/api/product", productRouter);
 appBackend.use("/api/findProducts", findRouter);
-appBackend.use("/api/accountPurchases", purchaseRouter)
+appBackend.use("/api/purchases", purchaseRouter)
 appBackend.use("/api/stripe", stripeRouter);
 
 appBackend.get("/test", async (req: Request, res: Response) => {
