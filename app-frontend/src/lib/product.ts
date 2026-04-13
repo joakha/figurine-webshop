@@ -23,6 +23,14 @@ const productPriceSortingOptions = [
     { value: "LOWEST", label: "Lowest" },
 ]
 
+const productStatuses = [
+    { value: "PLACED", label: "Placed" },
+    { value: "PAID", label: "Paid" },
+    { value: "IN_PROGRESS", label: "Preparing Purchase" },
+    { value: "OUT_FOR_DELIVERY", label: "On the Way" },
+    { value: "DELIVERED", label: "Delivered" },
+]
+
 const statusToStepIndex: Record<string, number> = {
     "PLACED": 0,
     "PAID": 1,
@@ -33,16 +41,16 @@ const statusToStepIndex: Record<string, number> = {
 
 const statusSteps = [
     {
-        title: 'Order Placed',
-        content: 'Your order has been placed',
+        title: 'Purchase Placed',
+        content: 'Your purchase has been placed',
     },
     {
         title: 'Payment Confirmed',
         content: 'Payment has been received',
     },
     {
-        title: 'Preparing Order',
-        content: 'Your order is being prepared',
+        title: 'Preparing Purchase',
+        content: 'Your purchase is being prepared',
     },
     {
         title: 'On the way',
@@ -71,5 +79,6 @@ export {
     productPriceSortingOptions,
     statusSteps,
     statusToStepIndex,
-    formatDate
+    formatDate,
+    productStatuses
 }

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import purchaseService from "../services/purchaseService";
 import { useAuth } from "@clerk/clerk-react";
-import type { AccountPurchase } from "../types/types";
+import type { Purchase } from "../types/types";
 import { List, Steps } from 'antd';
 import { statusSteps, statusToStepIndex, formatDate } from "../lib/product";
 
 const AccountPurchases = () => {
     const { getToken } = useAuth();
     const [loadingPurchases, setLoadingPurchases] = useState<boolean>(true);
-    const [accountPurchases, setAccountPurchases] = useState<AccountPurchase[] | undefined>();
+    const [accountPurchases, setAccountPurchases] = useState<Purchase[] | undefined>();
 
     const fetchAccountPurchases = async () => {
         try {

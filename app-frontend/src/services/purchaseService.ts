@@ -24,7 +24,23 @@ const getPurchases = async (token: string | null): Promise<Purchase[]> => {
     return response.data
 }
 
+const updatePurchaseStatus = async (token: string | null, purchaseId: string, statusUpdate: string): Promise<Purchase> => {
+    const body = {
+        status: statusUpdate
+    }
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.patch(`${BACKEND_ADDRESS}/api/purchases/updatePurchaseStatus/${purchaseId}`, body, config);
+    return response.data
+}
+
 export default {
     getAccountPurchases,
-    getPurchases
+    getPurchases,
+    updatePurchaseStatus
 }

@@ -52,7 +52,38 @@ const getPurchases = async (req: Request, res: Response) => {
     }
 }
 
+const updatePurchaseStatus = async (req: Request, res: Response) => {
+    try {
+        const authObject = getAuth(req);
+
+        const metadata = authObject.sessionClaims?.metadata as UserMetaData;
+
+        if (metadata.userRole !== "admin") return res.status(403).json({ error: "Not authorized" });
+
+        const id = req.params.id as string;
+
+        const updatedPurchase = await myPrismaClient.purchase.update({
+            where: {
+                id: id,
+            },
+            data: {
+                status: req.body.status
+            },
+            include: {
+                products: true,
+                deliveryDetails: true
+            }
+        });
+
+        res.json(updatedPurchase)
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ message: "Error updating purchase status" })
+    }
+}
+
 export {
     getAccountPurchases,
-    getPurchases
+    getPurchases,
+    updatePurchaseStatus
 }

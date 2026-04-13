@@ -8,6 +8,7 @@ import EditProduct from "./components/EditProduct"
 import AdminRouteWrapper from "./components/AdminRouteWrapper"
 import CartPage from "./components/CartPage"
 import AccountPurchases from "./components/AccountPurchases"
+import PurchaseDashBoard from "./components/PurchaseDashboard"
 
 function App() {
   return (
@@ -29,6 +30,14 @@ function App() {
             element={
               <AdminRouteWrapper>
                 <EditProduct />
+              </AdminRouteWrapper>
+            }
+          />
+          <Route
+            path="/purchase-dashboard"
+            element={
+              <AdminRouteWrapper>
+                <PurchaseDashBoard />
               </AdminRouteWrapper>
             }
           />
