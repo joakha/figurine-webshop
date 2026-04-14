@@ -16,7 +16,7 @@ const PurchaseDashBoard = () => {
       setLoadingPurchases(true);
       const token = await getToken();
 
-      const data = await purchaseService.getAccountPurchases(token);
+      const data = await purchaseService.getPurchases(token);
 
       console.log(data)
       setPurchases(data)
@@ -28,22 +28,28 @@ const PurchaseDashBoard = () => {
   };
 
   useEffect(() => {
-    fetchPurchases()
-  }, [])
+    fetchPurchases();
+
+    const interval = setInterval(() => {
+      fetchPurchases();
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const updatePurchaseStatus = async (purchaseId: string, status: string) => {
-      try {
-        setLoadingPurchases(true)
-        const token = await getToken();
+    try {
+      setLoadingPurchases(true)
+      const token = await getToken();
 
-        const updatedPurchase = await purchaseService.updatePurchaseStatus(token, purchaseId, status)
-        const updatedPurchases = purchases.map((purchase) => purchase.id === updatedPurchase.id ? updatedPurchase : purchase);
-        setPurchases(updatedPurchases);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoadingPurchases(false);
-      }
+      const updatedPurchase = await purchaseService.updatePurchaseStatus(token, purchaseId, status)
+      const updatedPurchases = purchases.map((purchase) => purchase.id === updatedPurchase.id ? updatedPurchase : purchase);
+      setPurchases(updatedPurchases);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingPurchases(false);
+    }
   }
 
   const columns = [
