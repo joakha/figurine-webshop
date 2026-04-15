@@ -3,7 +3,7 @@ import { productAvailabilities, productCategories, productTimeToDeliveryValues }
 import { UploadOutlined } from '@ant-design/icons';
 import type { ProductFormProps, ProductFormType } from "../types/types";
 
-const ProductForm = ({ form, onFinish }: ProductFormProps) => {
+const ProductForm = ({ form, onFinish, isSubmitting }: ProductFormProps) => {
 
     //add loading, toast, link, return type for api request here
 
@@ -113,7 +113,7 @@ const ProductForm = ({ form, onFinish }: ProductFormProps) => {
             </Form.Item>
 
             <Form.Item<ProductFormType> label={null}>
-                <Button color="default" variant="solid" htmlType="submit">
+                <Button color="default" variant="solid" htmlType="submit" disabled={isSubmitting}>
                     Submit
                 </Button>
             </Form.Item>

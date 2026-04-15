@@ -1,11 +1,11 @@
-import { Form, Typography, type FormProps } from 'antd';
+import { Form, notification, type FormProps } from 'antd';
 import productService from "../services/productService";
-import type { AxiosError } from "axios";
 import ProductForm from './ProductForm';
 import type { ProductFormType } from '../types/types';
 import { useAuth } from "@clerk/clerk-react";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 const EditProduct = () => {
 
@@ -13,7 +13,11 @@ const EditProduct = () => {
     const { getToken } = useAuth();
 
     const [loadingProduct, setLoadingProduct] = useState<boolean>(true);
+    const [fetchError, setFetchError] = useState<string | null>();
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [form] = Form.useForm<ProductFormType>();
+
+    const [notificationApi, notificationContextHolder] = notification.useNotification();
 
     const fetchProduct = async () => {
         try {
@@ -38,8 +42,16 @@ const EditProduct = () => {
                     }
                 ]
             });
-        } catch (err) {
-            console.error(err);
+        } catch (err: any) {
+            console.log(err);
+            notificationApi.error({
+                title: "Failed to fetch product",
+                description: err.response?.data?.message || "Something went wrong",
+                placement: "bottomRight",
+                duration: 8,
+                icon: <CloseCircleOutlined />
+            });
+            setFetchError("Product could not be loaded for editing!");
         } finally {
             setLoadingProduct(false)
         }
@@ -47,6 +59,7 @@ const EditProduct = () => {
 
     const onFinish: FormProps<ProductFormType>['onFinish'] = async (values) => {
         try {
+            setIsSubmitting(true);
             const token = await getToken();
 
             const productFormData = new FormData();
@@ -64,11 +77,27 @@ const EditProduct = () => {
             productFormData.append("availability", values.availability)
             productFormData.append("timeToDelivery", values.timeToDelivery)
 
-            await productService.putProduct(token, productId, productFormData)
+            const data = await productService.putProduct(token, productId, productFormData)
             fetchProduct();
-        } catch (err) {
-            const error = err as AxiosError;
-            console.log(error.response)
+
+            notificationApi.success({
+                title: "Product added",
+                description: `${data.name} was successfully added.`,
+                placement: "bottomRight",
+                duration: 8,
+                icon: <CheckCircleOutlined />
+            });
+        } catch (err: any) {
+            console.log(err);
+            notificationApi.error({
+                title: "Failed to edit product",
+                description: err.response?.data?.message || "Something went wrong",
+                placement: "bottomRight",
+                duration: 8,
+                icon: <CloseCircleOutlined />
+            });
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -77,16 +106,26 @@ const EditProduct = () => {
     }, [productId, form])
 
     return (
-        <div className='flex flex-1 flex-col items-center my-20'>
+        <div className='flex flex-1 flex-col items-center p-10'>
+            {notificationContextHolder}
+            <h2 className='text-2xl font-bold p-10 text-gray-600'>
+                Edit Product
+            </h2>
             {loadingProduct ? (
-                <div>Loading product...</div>
+                <>
+                    <div>Loading product...</div>
+                </>
+            ) : fetchError ? (
+                <div>{fetchError}</div>
             ) : (
                 <>
-                    <Typography.Title>Edit Product</Typography.Title>
-                    <ProductForm
-                        form={form}
-                        onFinish={onFinish}
-                    />
+                    <div className="mb-5 w-full min-w-62.5 max-w-150 bg-slate-300 p-10 rounded-2xl">
+                        <ProductForm
+                            form={form}
+                            onFinish={onFinish}
+                            isSubmitting={isSubmitting}
+                        />
+                    </div>
                 </>
             )}
         </div>

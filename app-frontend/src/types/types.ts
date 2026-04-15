@@ -14,7 +14,8 @@ type ProductFormType = {
 
 type ProductFormProps = {
     form: FormInstance<ProductFormType>,
-    onFinish: ((values: ProductFormType) => void)
+    onFinish: ((values: ProductFormType) => void),
+    isSubmitting: boolean
 }
 
 //product types

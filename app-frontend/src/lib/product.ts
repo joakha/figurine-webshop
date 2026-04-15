@@ -1,20 +1,20 @@
 const productAvailabilities = [
-    { value: "IN_STOCK", label: "In Stock" },
-    { value: "WAITING", label: "Waiting" },
-    { value: "OUT_OF_STOCK", label: "Out of stock" },
+    { value: "IN_STOCK", label: "(1) In Stock" },
+    { value: "WAITING", label: "(2) Waiting" },
+    { value: "OUT_OF_STOCK", label: "(3) Out of stock" },
 ]
 
 const productTimeToDeliveryValues = [
-    { value: "1 to 4 days", label: "1 to 4 days" },
-    { value: "5 to 10 days", label: "5 to 10 days" },
-    { value: "11 to 20 days", label: "11 to 20 days" },
+    { value: "1 to 4 days", label: "(1) 1 to 4 days" },
+    { value: "5 to 10 days", label: "(2) 5 to 10 days" },
+    { value: "11 to 20 days", label: "(3) 11 to 20 days" },
 ]
 
 const productCategories = [
     { value: 'disabled', label: 'Category', disabled: true },
     { value: '', label: 'All' },
-    { value: "FANTASY", label: "Fantasy" },
-    { value: "SCIFI", label: "Sci-fi" }
+    { value: "FANTASY", label: "(1) Fantasy" },
+    { value: "SCIFI", label: "(2) Sci-fi" }
 ]
 
 const productPriceSortingOptions = [

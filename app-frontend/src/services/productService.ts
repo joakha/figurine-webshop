@@ -10,6 +10,7 @@ const postProduct = async (token: string | null, newProduct: FormData): Promise<
     }
 
     const response = await axios.post(`${BACKEND_ADDRESS}/api/product`, newProduct, config)
+
     return response.data
 }
 

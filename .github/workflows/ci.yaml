@@ -114,6 +114,8 @@ jobs:
           URL: ${{ secrets.APP_URL }}
           USERNAME: ${{ secrets.TESTUSER_NAME }}
           PASSWORD: ${{ secrets.TESTUSER_PASSWORD }}
+          ADMINUSERNAME: ${{ secrets.ADMINUSER_NAME }}
+          ADMINPASSWORD: ${{ secrets.ADMINUSER_PASSWORD }}
         run: |
           robot robotframework-tests/tests
       
