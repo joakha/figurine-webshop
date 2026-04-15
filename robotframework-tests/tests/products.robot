@@ -109,4 +109,3 @@ the user edits product data
 
 the new product data should be edited
     Wait For Elements State    text=Product was successfully edited.   visible    timeout=10s
-    Sleep    1000s
