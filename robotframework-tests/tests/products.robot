@@ -24,7 +24,6 @@ Admin user can add a new product
 *** Keywords ***
 
 the user navigates to the front page address
-    New Browser    chromium    headless=False
     New Page    ${frontend_url}
 
 the user logs in as admin
