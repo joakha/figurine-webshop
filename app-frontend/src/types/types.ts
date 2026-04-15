@@ -50,7 +50,8 @@ type ProductFindType = {
 
 //component prop types
 type ProductCardProps = {
-    product: ProductType
+    product: ProductType,
+    isAdmin: boolean
 }
 
 type PaginationBarProps = {

@@ -21,6 +21,18 @@ Admin user can add a new product
     And the user clicks the submit button
     Then the new product should be added
 
+The Edit Product -form is displayed
+    Given the user navigates to the front page address
+    When the user logs in as admin
+    And the user clicks the edit button on a product
+    Then the edit product form should be displayed
+
+Admin user can edit a product
+    Given the edit product form is displayed
+    When the user edits product data
+    And the user clicks the submit button
+    Then the new product data should be edited
+
 *** Keywords ***
 
 the user navigates to the front page address
@@ -77,3 +89,24 @@ the user clicks the submit button
 
 the new product should be added
     Wait For Elements State    text=Product was successfully added.   visible    timeout=10s
+
+the user clicks the edit button on a product
+    Click        text=Edit >> nth=0
+
+the edit product form should be displayed
+    Wait For Elements State    text=Edit Product    visible
+
+the edit product form is displayed
+    the user navigates to the front page address
+    the user logs in as admin
+    the user clicks the edit button on a product
+    the edit product form should be displayed
+
+the user edits product data
+    ${uuid}    Evaluate    __import__('uuid').uuid4()
+    ${name}    Set Variable    product_${uuid}
+    Fill Text    id=productForm_description    testproduct edited ${name}
+
+the new product data should be edited
+    Wait For Elements State    text=Product was successfully edited.   visible    timeout=10s
+    Sleep    1000s

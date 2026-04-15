@@ -77,12 +77,12 @@ const EditProduct = () => {
             productFormData.append("availability", values.availability)
             productFormData.append("timeToDelivery", values.timeToDelivery)
 
-            const data = await productService.putProduct(token, productId, productFormData)
+            await productService.putProduct(token, productId, productFormData)
             fetchProduct();
 
             notificationApi.success({
-                title: "Product added",
-                description: `${data.name} was successfully added.`,
+                title: "Product edited",
+                description: `Product was successfully edited.`,
                 placement: "bottomRight",
                 duration: 8,
                 icon: <CheckCircleOutlined />

@@ -1,13 +1,16 @@
 import { ShoppingCartOutlined } from '@ant-design/icons';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 import type { ProductCardProps } from '../types/types';
 import useProductCart from '../hooks/useProductCart';
+import { useNavigate } from 'react-router-dom';
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, isAdmin }: ProductCardProps) => {
 
     const { Meta } = Card;
 
     const { dispatch, useReducerActions } = useProductCart();
+
+    const navigate = useNavigate();
 
     return (
         <Card
@@ -19,10 +22,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
                 />
             }
             actions={[
-                <ShoppingCartOutlined
-                    key=""
-                    onClick={() => dispatch({ type: useReducerActions.addProduct, payload: product })}
-                />,
+                isAdmin ? (
+                    <Button onClick={() => navigate(`/edit-product/${product.id}`)}>Edit</Button>
+                ) : (
+                    <ShoppingCartOutlined
+                        key=""
+                        onClick={() => dispatch({ type: useReducerActions.addProduct, payload: product })}
+                    />
+                ),
                 <span>{product.price}e</span>,
                 <span>{product.category}</span>
             ]}
@@ -31,7 +38,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
                 title={product.name}
                 description={product.description}
             />
-        </Card>
+        </Card >
     )
 }
 

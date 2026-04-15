@@ -5,8 +5,14 @@ import type { ProductType } from '../types/types';
 import productService from '../services/productService';
 import ProductCard from './ProductCard';
 import PaginationBar from './PaginationBar';
+import { useUser } from '@clerk/clerk-react';
 
 const ProductQueryInput = () => {
+
+    const { user } = useUser();
+
+    const role = user?.publicMetadata?.userRole;
+    const isAdmin = role === "admin" ? true : false;
 
     type QueryProps = GetProps<typeof Input.Search>;
 
@@ -89,7 +95,7 @@ const ProductQueryInput = () => {
                 <div className='grid grid-cols-2 gap-10'>
                     {foundProducts.map((product) => (
                         <div key={product.name} className="w-70">
-                            <ProductCard product={product} />
+                            <ProductCard product={product} isAdmin={isAdmin} />
                         </div>
                     ))}
                 </div>
