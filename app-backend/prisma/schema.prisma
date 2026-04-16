@@ -91,8 +91,12 @@ enum Availability {
 }
 
 enum Category {
-  FANTASY
   SCIFI
+  FANTASY
+  NATURE
+  SPACE
+  ROBOTICS
+  MODERN
 }
 
 enum PurchaseStatus {

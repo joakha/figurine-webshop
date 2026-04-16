@@ -1,4 +1,5 @@
 import type { FormInstance, UploadFile } from 'antd';
+import type { NotificationInstance } from 'antd/es/notification/interface';
 import type { ReactNode } from 'react';
 
 //types for forms
@@ -49,9 +50,14 @@ type ProductFindType = {
 }
 
 //component prop types
+type ProductQueryInputProps = {
+    notificationApi: NotificationInstance
+}
+
 type ProductCardProps = {
     product: ProductType,
-    isAdmin: boolean
+    isAdmin: boolean,
+    notificationApi: NotificationInstance
 }
 
 type PaginationBarProps = {
@@ -151,5 +157,6 @@ export type {
     ProductCartContextType,
     CartProductDetailsProps,
     StripeSession,
-    Purchase
+    Purchase,
+    ProductQueryInputProps
 }

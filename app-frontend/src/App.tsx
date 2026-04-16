@@ -9,11 +9,16 @@ import AdminRouteWrapper from "./components/AdminRouteWrapper"
 import CartPage from "./components/CartPage"
 import AccountPurchases from "./components/AccountPurchases"
 import PurchaseDashBoard from "./components/PurchaseDashboard"
+import { notification } from "antd"
 
 function App() {
+
+  const [notificationApi, notificationContextHolder] = notification.useNotification();
+
   return (
     <>
       <div className='flex flex-col min-h-screen bg-slate-200'>
+        {notificationContextHolder}
         <Header />
         <Routes>
           {/* admin routes */}
@@ -42,7 +47,7 @@ function App() {
             }
           />
           {/* public routes */}
-          <Route path="/" element={<FrontPage />} />
+          <Route path="/" element={<FrontPage notificationApi={notificationApi} />} />
           <Route path="/sign-up" element={<AppSignUp />} />
           <Route path="/sign-in" element={<AppSignIn />} />
           <Route path="/your-cart" element={<CartPage />} />

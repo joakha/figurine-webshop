@@ -12,9 +12,10 @@ const productTimeToDeliveryValues = [
 
 const productCategories = [
     { value: 'disabled', label: 'Category', disabled: true },
-    { value: '', label: 'All' },
-    { value: "FANTASY", label: "(1) Fantasy" },
-    { value: "SCIFI", label: "(2) Sci-fi" }
+    { value: "NATURE", label: "(1) Nature" },
+    { value: "SPACE", label: "(2) Space" },
+    { value: "ROBOTICS", label: "(3) Robotics" },
+    { value: "MODERN", label: "(4) Modern" }
 ]
 
 const productPriceSortingOptions = [

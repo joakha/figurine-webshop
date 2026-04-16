@@ -34,14 +34,6 @@ jobs:
         run: npm run build
 
       - name: Install Backend Dependencies and Build Backend
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          CLERK_WEBHOOK_SIGNING_SECRET: ${{ secrets.CLERK_WEBHOOK_SIGNING_SECRET }}
-          CLERK_PUBLISHABLE_KEY: ${{ secrets.CLERK_PUBLISHABLE_KEY }}
-          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
-          CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
-          CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
-          CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
         working-directory: app-backend
         run: npm run deploy-ci
 
@@ -75,10 +67,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Backend Dependencies
-        working-directory: app-backend
-        run: npm ci
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -105,6 +93,7 @@ jobs:
           CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
           FRONTEND_ADDRESS: ${{ secrets.FRONTEND_ADDRESS }}
           STRIPE_KEY: ${{ secrets.STRIPE_KEY }}
+          STRIPE_WEBHOOK_SIGNING_SECRET: ${{ secrets.STRIPE_WEBHOOK_SIGNING_SECRET }}
         working-directory: app-backend
         run: |
           nohup npm run start &

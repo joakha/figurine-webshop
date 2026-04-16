@@ -1,13 +1,13 @@
 import { Input, Select, type GetProps } from 'antd';
 import { productPriceSortingOptions, productCategories } from '../lib/product';
 import { useState, useEffect } from 'react';
-import type { ProductType } from '../types/types';
+import type { ProductType, ProductQueryInputProps } from '../types/types';
 import productService from '../services/productService';
 import ProductCard from './ProductCard';
 import PaginationBar from './PaginationBar';
 import { useUser } from '@clerk/clerk-react';
 
-const ProductQueryInput = () => {
+const ProductQueryInput = ({ notificationApi }: ProductQueryInputProps) => {
 
     const { user } = useUser();
 
@@ -95,7 +95,11 @@ const ProductQueryInput = () => {
                 <div className='grid grid-cols-2 gap-10'>
                     {foundProducts.map((product) => (
                         <div key={product.name} className="w-70">
-                            <ProductCard product={product} isAdmin={isAdmin} />
+                            <ProductCard
+                                product={product}
+                                isAdmin={isAdmin}
+                                notificationApi={notificationApi}
+                            />
                         </div>
                     ))}
                 </div>

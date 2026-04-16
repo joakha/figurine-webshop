@@ -111,15 +111,12 @@ const EditProduct = () => {
             <h2 className='text-2xl font-bold p-10 text-gray-600'>
                 Edit Product
             </h2>
-            {loadingProduct ? (
-                <>
-                    <div>Loading product...</div>
-                </>
-            ) : fetchError ? (
+            {fetchError ? (
                 <div>{fetchError}</div>
             ) : (
                 <>
                     <div className="mb-5 w-full min-w-62.5 max-w-150 bg-slate-300 p-10 rounded-2xl">
+                        {loadingProduct && <div>Loading product...</div>}
                         <ProductForm
                             form={form}
                             onFinish={onFinish}

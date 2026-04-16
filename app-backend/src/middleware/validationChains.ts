@@ -18,7 +18,7 @@ const validateAddProduct = [
 
   body("category")
     .notEmpty().withMessage("Category required")
-    .isIn(["FANTASY", "SCIFI"]).withMessage("Category must be FANTASY or SCIFI"),
+    .isIn(["FANTASY", "SCIFI", "NATURE", "SPACE", "ROBOTICS", "MODERN"]).withMessage("Category doesn't exist!"),
 
   body("availability")
     .optional()
@@ -39,7 +39,7 @@ const validateFindQuery = [
 
   query("category")
     .optional()
-    .isIn(["FANTASY", "SCIFI"]).withMessage("Category doesn't exist!"),
+    .isIn(["FANTASY", "SCIFI", "NATURE", "SPACE", "ROBOTICS", "MODERN"]).withMessage("Category doesn't exist!"),
 
   query("priceOption")
     .trim()
