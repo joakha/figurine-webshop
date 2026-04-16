@@ -67,6 +67,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install Backend Dependencies
+        working-directory: app-backend
+        run: npm ci
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
