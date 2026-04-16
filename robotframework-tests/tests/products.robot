@@ -76,7 +76,7 @@ the user inputs product data
     Upload File By Selector    //input[@type='file']    ${CURDIR}/images/testimage.png
 
     Click        id=productForm_category
-    Click        text=(1) Fantasy
+    Click        text=(1) Nature
 
     Click        id=productForm_availability
     Click        text=(2) Waiting
