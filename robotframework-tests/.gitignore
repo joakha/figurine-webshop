@@ -2,4 +2,9 @@ tests/variables.py
 tests/__pycache__
 tests/my_authentication.robot
 tests/my_products.robot
+tests/test.robot
+tests/report.html
+tests/playwright-log.txt
+tests/output.xml
+tests/log.html
 results/

@@ -32,10 +32,16 @@ Admin user can edit a product
     When the user edits product data
     And the user clicks the submit button
     Then the new product data should be edited
+    
+Products are displayed
+    Given the user navigates to the front page address
+    When the user searches for specific products
+    Then the products are displayed
 
 *** Keywords ***
 
 the user navigates to the front page address
+    New Browser    chromium    headless=False
     New Page    ${frontend_url}
 
 the user logs in as admin
@@ -105,7 +111,17 @@ the edit product form is displayed
 the user edits product data
     ${uuid}    Evaluate    __import__('uuid').uuid4()
     ${name}    Set Variable    product_${uuid}
-    Fill Text    id=productForm_description    testproduct edited ${name}
+    Fill Text    id=productForm_description    testproduct toimi ${name}
 
 the new product data should be edited
-    Wait For Elements State    text=Product was successfully edited.   visible    timeout=10s
+    Wait For Elements State    text=Description  visible    timeout=10s
+
+the user searches for specific products
+    Click        text=Category
+    Click        text=(1) Nature
+    Fill Text    input[placeholder="Query products"]        Oak
+    Click        text=Find
+
+Then the products are displayed
+    Wait For Elements State    text=Oak Tree Miniature   visible    timeout=10s
+    Wait For Elements State    text=River Stone Set    detached    timeout=10s
