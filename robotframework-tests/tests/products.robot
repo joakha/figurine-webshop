@@ -9,6 +9,7 @@ ${adminuser_name}    %{ADMINUSERNAME}
 ${adminuser_password}    %{ADMINPASSWORD}
 
 *** Test Cases ***
+
 The Add Product -form is displayed
     Given the user navigates to the front page address
     When the user logs in as admin

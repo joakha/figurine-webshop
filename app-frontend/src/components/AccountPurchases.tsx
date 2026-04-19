@@ -52,7 +52,7 @@ const AccountPurchases = () => {
                                     <div className="flex flex-col items-start">
                                         <div>{accountPurchase.deliveryDetails.email}</div>
                                         <div>{accountPurchase.deliveryDetails?.addressLine1}</div>
-                                        <div>Total Price: {accountPurchase.totalCount}</div>
+                                        <div>Total Price: {accountPurchase.totalCount / 100}e</div>
                                     </div>
                                 ]}
                                 extra={

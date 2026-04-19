@@ -3,6 +3,7 @@ import { Card, Button } from 'antd';
 import type { ProductCardProps } from '../types/types';
 import useProductCart from '../hooks/useProductCart';
 import { useNavigate } from 'react-router-dom';
+import { SignedIn } from '@clerk/clerk-react';
 
 const ProductCard = ({ product, isAdmin, notificationApi }: ProductCardProps) => {
 
@@ -26,7 +27,7 @@ const ProductCard = ({ product, isAdmin, notificationApi }: ProductCardProps) =>
     return (
         <Card
             cover={
-                <div style={{ maxHeight: 300, overflow: "hidden" }}>
+                <div style={{ maxHeight: 250, overflow: "hidden" }}>
                     <img
                         draggable={false}
                         alt={product.description}
@@ -38,10 +39,12 @@ const ProductCard = ({ product, isAdmin, notificationApi }: ProductCardProps) =>
                 isAdmin ? (
                     <Button onClick={() => navigate(`/edit-product/${product.id}`)}>Edit</Button>
                 ) : (
-                    <ShoppingCartOutlined
-                        key=""
-                        onClick={AddProductToCart}
-                    />
+                    <SignedIn>
+                        <ShoppingCartOutlined
+                            key=""
+                            onClick={AddProductToCart}
+                        />
+                    </SignedIn>
                 ),
                 <span>{product.price}e</span>,
                 <span>{product.category}</span>
