@@ -49,13 +49,13 @@ const ProductCartProvider = ({ children }: ComponentChildrenProps): ReactElement
 
     const sortedProductCart: ProductInCart[] = state.productCart.sort((a: ProductInCart, b: ProductInCart) => a.name.localeCompare(b.name));
     const productCount = sortedProductCart.reduce((prev, curr) => prev + curr.qty, 0);
-    const orderPrice = sortedProductCart.reduce((prev, curr) => prev + curr.qty * curr.price, 0);
+    const purchasePrice = sortedProductCart.reduce((prev, curr) => prev + curr.qty * curr.price, 0);
 
     const productCartContextProviderValue: ProductCartContextType = {
         dispatch,
         sortedProductCart,
         productCount,
-        orderPrice,
+        purchasePrice,
         useReducerActions
     }
 

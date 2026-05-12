@@ -1,9 +1,9 @@
 import { useAuth } from "@clerk/clerk-react";
-import { Table, Select, Card, Descriptions } from "antd";
+import { Table, Select, Card, Descriptions, Steps } from "antd";
 import { useEffect, useState } from "react";
 import type { Purchase } from "../types/types";
 import purchaseService from "../services/purchaseService";
-import { productStatuses } from "../lib/product";
+import { productStatuses, statusSteps, statusToStepIndex } from "../lib/product";
 
 const PurchaseDashBoard = () => {
 
@@ -29,12 +29,6 @@ const PurchaseDashBoard = () => {
 
   useEffect(() => {
     fetchPurchases();
-
-    const interval = setInterval(() => {
-      fetchPurchases();
-    }, 60000);
-
-    return () => clearInterval(interval);
   }, []);
 
   const updatePurchaseStatus = async (purchaseId: string, status: string) => {
@@ -64,9 +58,10 @@ const PurchaseDashBoard = () => {
       ),
     },
     {
-      title: "Total Items",
+      title: "Total Price",
       dataIndex: "totalCount",
       key: "totalCount",
+      render: (totalCount: number) => `${totalCount / 100 }e`
     },
     {
       title: "Date",
@@ -101,13 +96,16 @@ const PurchaseDashBoard = () => {
             dataSource={purchases}
             expandable={{
               expandedRowRender: (purchase) => (
-                <Descriptions bordered size="small" column={1}>
+                <Descriptions bordered size="small" column={2}>
                   <Descriptions.Item label="Products">
                     {purchase.products.map((product) => (
                       <div key={product.id}>
                         {product.qty} × {product.name}
                       </div>
                     ))}
+                  </Descriptions.Item>
+                  <Descriptions.Item>
+                    {<Steps orientation="vertical" current={statusToStepIndex[purchase.status]} items={statusSteps} size="small" />}
                   </Descriptions.Item>
                 </Descriptions>
               ),

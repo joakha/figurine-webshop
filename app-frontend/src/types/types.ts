@@ -90,7 +90,7 @@ type ProductCartContextType = {
     dispatch: React.Dispatch<ProductCartStateActionType>,
     sortedProductCart: ProductInCart[],
     productCount: number,
-    orderPrice: number,
+    purchasePrice: number,
     useReducerActions: useReducerActionsType
 }
 

@@ -118,8 +118,8 @@ const createCheckoutSession = async (req: Request, res: Response) => {
             metadata: {
                 purchaseId: newPurchase.id,
             },
-            success_url: `${process.env.FRONTEND_ADDRESS}/order-status?success=true`,
-            cancel_url: `${process.env.FRONTEND_ADDRESS}/checkout?cancelled=true`,
+            success_url: `${process.env.FRONTEND_ADDRESS}/your-purchases`,
+            cancel_url: `${process.env.FRONTEND_ADDRESS}`,
         });
 
         if (!StripeCheckout.url) {

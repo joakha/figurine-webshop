@@ -28,6 +28,12 @@ const AccountPurchases = () => {
 
     useEffect(() => {
         fetchAccountPurchases()
+
+        const interval = setInterval(() => {
+            fetchAccountPurchases();
+        }, 60000);
+
+        return () => clearInterval(interval);
     }, [])
 
     return (

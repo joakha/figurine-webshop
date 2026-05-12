@@ -8,7 +8,7 @@ import { useAuth } from "@clerk/clerk-react";
 const CartPage = () => {
     const { getToken } = useAuth();
 
-    const { sortedProductCart, productCount, orderPrice } = useProductCart();
+    const { sortedProductCart, productCount, purchasePrice } = useProductCart();
 
     const makePurchase = async () => {
         const purchaseData: StripeSession = {
@@ -18,7 +18,7 @@ const CartPage = () => {
                 email: "testemail@test.com",
                 addressLine1: "testAddress 62a"
             },
-            totalPrice: orderPrice
+            totalPrice: purchasePrice
         }
 
         try {
@@ -40,7 +40,7 @@ const CartPage = () => {
             ))}
             <div className="flex flex-col items-center mt-5 mb-20 gap-5">
                 <div className="font-bold text-2xl">Total Product Count: {productCount}</div>
-                <div className="font-bold text-2xl">Total Price: {orderPrice}e</div>
+                <div className="font-bold text-2xl">Total Price: {purchasePrice}e</div>
                 <Button onClick={makePurchase}>Go to checkout</Button>
             </div>
         </div>
