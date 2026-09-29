@@ -3,6 +3,8 @@
 A full-stack webshop for miniature figurines. Customers can browse and search products, fill a cart, pay through Stripe and follow their order status. Admins can manage the product catalogue and update the status of incoming purchases.
 The focus of this project was to learn to utilize third party services.
 
+App is running here: https://figurine-webshop.onrender.com/
+
 ## Features
 
 ### Customer features
